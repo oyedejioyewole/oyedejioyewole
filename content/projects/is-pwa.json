@@ -1,0 +1,7 @@
+{
+  "description": "Check whether a URL can be installed as a web app.",
+  "isDraft": false,
+  "name": "is-pwa",
+  "displayName": "Is PWA?",
+  "url": "https://is-pwa.vercel.app"
+}

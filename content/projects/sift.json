@@ -1,0 +1,6 @@
+{
+  "description": "Swipe your way through your emails (currently Gmail is supported)",
+  "isDraft": true,
+  "name": "sift",
+  "displayName": "Sift"
+}
