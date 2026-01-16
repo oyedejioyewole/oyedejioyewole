@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
-    "notivue/nuxt",
     "nuxt-og-image",
     "nuxt-phosphor-icons",
   ],
