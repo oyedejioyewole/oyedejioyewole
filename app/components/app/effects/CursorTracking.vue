@@ -28,7 +28,6 @@ watch([x, y], ([newX, newY]) => {
     newX - window.pageXOffset,
     newY - window.pageYOffset,
   );
-  console.info(currentElement);
   const shouldSnap = isElementSnappable(currentElement);
 
   cursorSpriteAnimatable.value.scale(shouldSnap ? 0 : 1);

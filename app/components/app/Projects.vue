@@ -27,10 +27,10 @@ const { data: projects } = await useAsyncData(
 </script>
 
 <template>
-  <div class="grid grid-cols-3 gap-4">
+  <div class="grid grid-rows-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <button
       v-for="project in projects"
-      class="bg-primary-900/10 border dark:bg-primary-100/10 p-5 rounded-2xl space-y-4 block backdrop-blur-sm hover:ring group"
+      class="bg-primary-900/10 border dark:bg-primary-100/10 p-5 rounded-2xl space-y-4 backdrop-blur-sm hover:ring group"
       data-snap-cursor
       :key="project.name"
       :class="{ 'cursor-pointer': project.url }"
@@ -63,7 +63,9 @@ const { data: projects } = await useAsyncData(
         />
       </div>
 
-      <p class="font-bold w-fit">{{ project.displayName ?? project.name }}</p>
+      <p class="font-bold text-left w-fit">
+        {{ project.displayName ?? project.name }}
+      </p>
       <ContentRenderer class="text-left" :value="project.description" />
     </button>
   </div>
