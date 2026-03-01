@@ -1,24 +1,29 @@
-<script setup lang="ts">
-const error = useError();
-
-useHead({
-  htmlAttrs: {
-    lang: "en",
-  },
-  title: "404",
-  titleTemplate: "%s · Oyedeji Oyewole",
-});
-</script>
-
 <template>
+  <Html lang="en" />
+
+  <Head>
+    <Title>{{ $props.error.status }}</Title>
+  </Head>
+
   <NuxtLayout>
-    <section
-      class="col-span-1 lg:col-span-3 grid place-content-center gap-y-10"
-    >
-      <h1 class="text-9xl font-serif place-self-center">
-        {{ error?.statusCode }}
-      </h1>
-      <p class="text-lg">{{ error?.message }}</p>
+    <section class="grid min-h-screen place-content-center gap-y-4 text-center">
+      <ProseP>Hmm, that's weird, a</ProseP>
+
+      <ProseH1 class="text-[10dvw]">
+        {{ $props.error.status }}
+      </ProseH1>
+
+      <ProseP class="max-w-md"
+        ><ProseStrong>Reason:</ProseStrong> {{ error.message }}</ProseP
+      >
+
+      <ProseA class="mx-auto w-fit" href="/">Go home</ProseA>
     </section>
   </NuxtLayout>
 </template>
+
+<script lang="ts" setup>
+import type { NuxtError } from "#app";
+
+defineProps<{ error: NuxtError }>();
+</script>
