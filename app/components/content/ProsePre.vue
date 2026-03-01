@@ -1,41 +1,6 @@
-<script setup lang="ts">
-const props = defineProps({
-  code: {
-    type: String,
-    default: "",
-  },
-  language: {
-    type: String,
-    default: null,
-  },
-  filename: {
-    type: String,
-    default: null,
-  },
-  highlights: {
-    type: Array as () => number[],
-    default: () => [],
-  },
-  meta: {
-    type: String,
-    default: null,
-  },
-  class: {
-    type: String,
-    default: null,
-  },
-});
-
-const { copy, copied } = useClipboard();
-</script>
-
 <template>
-  <div class="space-y-4">
-    <button
-      class="px-5 py-3 flex gap-x-2 items-center border rounded-xl hover:ring backdrop-blur-sm"
-      data-snap-cursor
-      @click="copy($props.code)"
-    >
+  <div class="relative space-y-4">
+    <UiButton @click="copy($props.code)">
       <PhosphorIcon
         :name="{ clipboard: !copied, 'clipboard-text': copied }"
         size="20"
@@ -43,12 +8,73 @@ const { copy, copied } = useClipboard();
       />
 
       {{ copied ? "Copied" : "Copy" }}
-    </button>
+    </UiButton>
 
-    <pre
-      class="dark:bg-primary-100/10 p-5 bg-primary-900/10 rounded-xl border backdrop-blur-sm text-wrap"
+    <div
+      class="ease-in-out-circ group relative cursor-pointer overflow-hidden rounded-xl border p-3 backdrop-blur-md transition-all duration-300"
       data-snap-cursor
-      :class="$props.class"
-    ><slot /></pre>
+      :style="{ maxHeight }"
+      @click="isCollapsible && preElementRef && toggleExpand(preElementRef)"
+    >
+      <pre
+        ref="pre-element"
+        :class="
+          twMerge(
+            'text-sm text-wrap',
+            isCollapsible &&
+              !isExpanded &&
+              'transition-opacity hover:opacity-80',
+            $props.class as string | undefined,
+          )
+        "
+      ><slot /></pre>
+    </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { twMerge } from "tailwind-merge";
+
+interface ProsePreProps {
+  class?: string | null;
+  code?: string;
+  filename?: string | null;
+  highlights?: number[];
+  language?: string | null;
+  meta?: string | null;
+}
+
+withDefaults(defineProps<ProsePreProps>(), {
+  class: null,
+  code: "",
+  filename: null,
+  highlights: () => [],
+  language: null,
+  meta: null,
+});
+
+const { copy, copied } = useClipboard();
+
+const isExpanded = shallowRef(false);
+const preElementRef = useTemplateRef("pre-element");
+const maxHeight = shallowRef("480px");
+
+watch(preElementRef, (element) => {
+  if (!element) return;
+
+  if (element.scrollHeight <= 480) {
+    maxHeight.value = "auto";
+  }
+});
+
+const toggleExpand = (element: HTMLPreElement) => {
+  maxHeight.value = isExpanded.value
+    ? "480px"
+    : `${element.scrollHeight + 24}px`; // Add 24px to account for padding
+  useToggle(isExpanded)();
+};
+
+const isCollapsible = computed(
+  () => preElementRef.value && preElementRef.value.scrollHeight > 480,
+);
+</script>

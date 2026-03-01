@@ -1,17 +1,22 @@
 <template>
-  <h3 class="font-serif text-2xl" :id="props.id">
-    <a v-if="props.id && generate" :href="`#${props.id}`">
+  <h3 class="font-serif text-2xl" :id="$props.id">
+    <a v-if="$props.id && generate" :href="`#${$props.id}`">
       <slot />
     </a>
     <slot v-else />
   </h3>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, useRuntimeConfig } from "#imports";
 
-const props = defineProps<{ id?: string }>();
+interface ProseH3Props {
+  id?: string;
+}
 
+const props = defineProps<ProseH3Props>();
+
+// Generate anchor links for h3 if configured and id is provided
 const { headings } = useRuntimeConfig().public.mdc;
 const generate = computed(
   () =>
