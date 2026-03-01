@@ -1,72 +1,70 @@
-<script lang="ts" setup>
-import { parseMarkdown } from "@nuxtjs/mdc/runtime";
-
-const props = defineProps<{ isFeatured?: boolean }>();
-
-const { data: projects } = await useAsyncData(
-  props.isFeatured ? "featuredProjects" : "allProjects",
-  async () => {
-    const allProjects = await queryCollection("projects").all();
-
-    const transformedProjects = await Promise.all(
-      allProjects.map(async (project) => ({
-        ...project,
-        description: await parseMarkdown(project.description),
-      })),
-    );
-
-    if (!props.isFeatured) return transformedProjects;
-
-    const featuredProjects = transformedProjects
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 5)
-      .sort((a, b) => a.name.localeCompare(b.name));
-    return featuredProjects;
-  },
-);
-</script>
-
 <template>
-  <div class="grid grid-rows-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <button
+  <div class="flex flex-col gap-4">
+    <AppEffectsSpotlightCard
       v-for="project in projects"
-      class="bg-primary-900/10 border dark:bg-primary-100/10 p-5 rounded-2xl space-y-4 backdrop-blur-sm hover:ring group"
       data-snap-cursor
+      :class="[
+        'group flex max-w-xs flex-col items-start gap-y-4 rounded-2xl border border-dashed backdrop-blur-sm 2xl:max-w-sm',
+        project.url && 'cursor-pointer',
+      ]"
       :key="project.name"
-      :class="{ 'cursor-pointer': project.url }"
       @click="navigateTo(project.url, { external: true })"
     >
-      <!-- Project status -->
-
-      <div class="flex justify-between">
+      <!-- Project status badge and external link indicator -->
+      <div class="flex w-full justify-between">
         <div
-          class="inline-flex bg-primary-100 dark:bg-primary-900 px-3 py-1 font-sans rounded-full items-center gap-x-2 w-fit"
+          class="bg-primary-900/10 dark:bg-primary-100/10 inline-flex w-fit items-center gap-x-2 rounded-full px-3 py-1 font-sans max-2xl:text-sm"
         >
           <PhosphorIcon
+            size="20"
+            weight="duotone"
             :name="{
               'pencil-line': project.isDraft,
               package: !project.isDraft,
             }"
-            weight="duotone"
-            size="20"
           />
 
           {{ project.isDraft ? "In progress" : "Completed" }}
         </div>
 
+        <!-- Arrow icon shown on hover if project has external URL -->
         <PhosphorIcon
           v-show="project.url"
-          class="opacity-0 group-hover:opacity-100 transition"
+          class="opacity-0 transition group-hover:opacity-100"
           name="arrow-square-out"
-          weight="duotone"
           size="20"
+          weight="duotone"
         />
       </div>
 
-      <p class="font-bold text-left w-fit">
+      <p class="w-fit text-left font-bold">
         {{ project.displayName ?? project.name }}
       </p>
       <ContentRenderer class="text-left" :value="project.description" />
-    </button>
+    </AppEffectsSpotlightCard>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { parseMarkdown } from "#imports";
+
+// Fetch and transform projects, optionally filtering to featured projects
+const { data: projects } = await useAsyncData("featuredProjects", async () => {
+  const allProjects = await queryCollection("projects").all();
+
+  const transformedProjects = await Promise.all(
+    allProjects.map(async (project) => ({
+      ...project,
+      description: await parseMarkdown(project.description),
+    })),
+  );
+
+  // Shuffle and select first 2, then sort alphabetically
+  const featuredProjects = transformedProjects
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 2)
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  return featuredProjects;
+});
+</script>
