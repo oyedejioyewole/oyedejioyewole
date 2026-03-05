@@ -52,10 +52,10 @@ export default defineNuxtConfig({
     "/**": { isr: true },
   },
   runtimeConfig: {
-    vercel: {
-      bearerToken: "",
-      initialDeploymentId: "",
-    },
+    // vercel: {
+    //   bearerToken: "",
+    //   initialDeploymentId: "",
+    // },
     pexels: {
       apiKey: "",
       showcaseCollectionId: "",
