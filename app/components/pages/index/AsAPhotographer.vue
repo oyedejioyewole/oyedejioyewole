@@ -1,32 +1,29 @@
 <template>
-  <PagesSection v-if="photos" class="xl:grid-cols-5" multi-column>
-    <!-- Left column: Masonry gallery -->
-    <section
-      class="col-span-3 p-8"
-      data-allow-mismatch
-      data-scroll
-      data-scroll-speed="0.5"
-    >
-      <MasonryWall
-        ref="photography-wall"
-        :column-width="200"
-        :gap="16"
-        :items="photos.media"
-        :max-columns="2"
-        :ssr-columns="2"
-        @redraw="onRedraw"
-      >
-        <template #default="{ item }">
-          <NuxtImg
-            class="rounded-lg outline-offset-4 brightness-70 sepia duration-300 hover:outline hover:brightness-100 hover:sepia-0"
-            data-snap-cursor
-            format="webp"
-            placeholder
-            :src="item!.src"
-            :width="item!.width"
-          />
-        </template>
-      </MasonryWall>
+  <PagesSection v-if="photos" class="xl:grid-cols-5" multi-column no-divider>
+    <!-- Photo showcase -->
+    <section class="col-span-3 columns-2 space-y-4 gap-x-4 p-8">
+      <MotionNuxtImg
+        v-for="(photo, index) in photos.media"
+        :key="photo!.id"
+        class="rounded-lg outline outline-offset-2 brightness-70 sepia outline-dashed hover:brightness-100 hover:sepia-0"
+        data-snap-cursor
+        format="webp"
+        placeholder
+        :in-view-options="{ once: true }"
+        :src="photo!.src"
+        :while-hover="{ scale: 0.9 }"
+        :while-in-view="
+          animateImages
+            ? {
+                x: [-60, 0],
+                opacity: [0, 1],
+                transition: { delay: (index % 2) * 0.2 },
+              }
+            : {}
+        "
+        :width="960"
+        @load="loadedImages++"
+      />
     </section>
 
     <!-- Right column: intro and slot content -->
@@ -48,34 +45,20 @@
 </template>
 
 <script lang="ts" setup>
-import { MasonryWall } from "@yeger/vue-masonry-wall";
+import { motion } from "motion-v";
+
+const MotionNuxtImg = motion.create(resolveComponent("NuxtImg"));
 
 const { socialLinks } = useAppConfig();
 
-const { data: photos } = await useFetch("/api/photos/showcase", {
+const { data: photos } = useLazyFetch("/api/photos/showcase", {
   getCachedData: (key, nuxtApp) =>
     nuxtApp.payload.data[key] || nuxtApp.static.data[key],
+  server: false,
 });
 
-const { completeTask } = useTasks();
-const photographyWallRef = useTemplateRef("photography-wall");
-
-async function onRedraw() {
-  const imgs = [
-    ...(photographyWallRef.value?.$el.querySelectorAll("img") ?? []),
-  ] as HTMLImageElement[];
-
-  await Promise.all(
-    imgs.map((img) =>
-      img.complete
-        ? Promise.resolve()
-        : new Promise<void>((resolve) => {
-            img.onload = () => resolve();
-            img.onerror = () => resolve();
-          }),
-    ),
-  );
-
-  completeTask("photography-wall");
-}
+const loadedImages = shallowRef(0);
+const animateImages = computed(
+  () => loadedImages.value === (photos.value?.media.length ?? 0),
+);
 </script>
