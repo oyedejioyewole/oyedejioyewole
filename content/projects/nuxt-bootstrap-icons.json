@@ -1,0 +1,6 @@
+{
+  "description": "An easier way of using bootstrap-icons (by [@twbs](https://icons.getbootstrap.com)) in your Nuxt project!",
+  "isDraft": false,
+  "name": "nuxt-bootstrap-icons",
+  "url": "https://nuxt-bootstrap-icons.vercel.app"
+}

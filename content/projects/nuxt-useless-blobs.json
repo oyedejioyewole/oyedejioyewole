@@ -1,0 +1,6 @@
+{
+  "description": "Just a simple integration for [useless-blobs](https://npmjs.com/package/useless-blobs) in Nuxt.",
+  "isDraft": false,
+  "name": "nuxt-useless-blobs",
+  "url": "https://nuxt-useless-blobs.vercel.app"
+}
