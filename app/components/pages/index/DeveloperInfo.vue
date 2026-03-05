@@ -20,12 +20,12 @@
 <script lang="ts" setup>
 import * as blobs2 from "blobs/v2";
 
-const { data: publishedProjectsCount } = await useAsyncData(async () =>
+const { data: publishedProjectsCount } = await useLazyAsyncData(() =>
   queryCollection("projects").count(),
 );
 
 // Generate animated blob shape and refresh on mouseenter for the link to create an interactive effect
-const { data: blobPath, refresh: refreshBlobPath } = await useAsyncData(
+const { data: blobPath, refresh: refreshBlobPath } = await useLazyAsyncData(
   async () =>
     blobs2.svgPath({
       seed: Math.random(),
@@ -33,5 +33,6 @@ const { data: blobPath, refresh: refreshBlobPath } = await useAsyncData(
       randomness: 3,
       size: 60,
     }),
+  { server: false },
 );
 </script>

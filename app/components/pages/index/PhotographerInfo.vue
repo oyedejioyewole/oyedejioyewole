@@ -28,7 +28,7 @@ interface PhotographerInfoProps {
 defineProps<PhotographerInfoProps>();
 
 // Generate animated blob shape and refresh on mouseenter for the link to create an interactive effect
-const { data: blobPath, refresh: refreshBlobPath } = await useAsyncData(
+const { data: blobPath, refresh: refreshBlobPath } = await useLazyAsyncData(
   async () =>
     blobs2.svgPath({
       seed: Math.random(),
@@ -36,5 +36,6 @@ const { data: blobPath, refresh: refreshBlobPath } = await useAsyncData(
       randomness: 3,
       size: 60,
     }),
+  { server: false },
 );
 </script>
