@@ -1,6 +1,6 @@
 <template>
-  <PagesSection>
-    <!-- Logo and profile image with divider -->
+  <PagesSection no-divider>
+    <!-- Identity x profile picture -->
     <div class="mx-auto flex items-center gap-x-8">
       <NuxtLink to="/">
         <AppBranding class="size-30 rounded-lg blur-sm" />
@@ -9,49 +9,33 @@
       <PhosphorIcon class="size-10" name="x" weight="thin" />
 
       <NuxtImg
-        class="size-30 rounded-lg border border-dashed p-1 transition hover:ring"
+        class="size-30 rounded-lg outline outline-offset-4 outline-dashed hover:outline-solid"
         data-snap-cursor
-        format="webp"
         placeholder
         provider="github"
         src="oyedejioyewole"
-        @load="completeTask('profile-image')"
       />
     </div>
 
     <slot />
 
-    <!-- Scroll indicator with animated mouse icon -->
-    <button
-      ref="scroll-for-more-button"
+    <!-- Scroll indicator -->
+    <motion.button
       data-snap-cursor
       class="group absolute bottom-8 flex cursor-pointer gap-x-2"
+      :animate="scrollY >= 40 ? { opacity: 0 } : { opacity: 1 }"
+      :transition="{ ease: 'circInOut' }"
     >
       <PhosphorIcon
-        class="ease-in-out-circ size-5 rotate-180 animate-bounce 2xl:size-7.5"
+        class="ease-in-out-circ size-7.5 rotate-180 animate-bounce"
         name="mouse-simple"
       />
-    </button>
+    </motion.button>
   </PagesSection>
 </template>
 
 <script lang="ts" setup>
-import { animate } from "animejs/animation";
+import { motion } from "motion-v";
 
-const { y } = useWindowScroll();
-const { completeTask } = useTasks();
-
-const scrollForMoreButtonRef = useTemplateRef("scroll-for-more-button");
-watch([scrollForMoreButtonRef, y], ([element, scrollY]) => {
-  if (!element || !scrollY || scrollY < 40) return;
-
-  animate(element, {
-    opacity: 0,
-    duration: 300,
-    ease: "inOutCirc",
-    onComplete: () => {
-      element.style.visibility = "hidden";
-    },
-  });
-});
+const { y: scrollY } = useWindowScroll();
 </script>

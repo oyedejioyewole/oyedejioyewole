@@ -2,38 +2,43 @@
   <div v-if="content">
     <Title>{{ content.title }}</Title>
 
-    <AppSplashScreen
-      v-if="showSplashScreen"
-      :number-of-tasks="content.numberOfTasks!"
-    />
+    <AnimatePresence>
+      <AppSplashScreen
+        v-if="showSplashScreen"
+        @animation-loop-finish="hasAnimationLoopFinished = !pending"
+      />
 
-    <ContentRenderer
-      v-show="!showSplashScreen"
-      :class="['space-y-6', $route.path !== '/' && 'm-8']"
-      :value="content"
-    />
+      <ContentRenderer
+        v-show="!showSplashScreen"
+        :class="['space-y-6', $route.path !== '/' && 'm-8']"
+        :value="content"
+      />
+    </AnimatePresence>
   </div>
 </template>
 
 <script lang="ts" setup>
-const route = useRoute();
-const { numberOfCompletedTasks } = useTasks();
+import { AnimatePresence } from "motion-v";
 
-const { data: content } = await useAsyncData(
+const route = useRoute();
+
+const { data: content, pending } = useLazyAsyncData(
   `content-${route.path}`,
   () => queryCollection("content").path(route.path).first(),
-  { watch: [route] },
+  {
+    watch: [route],
+    getCachedData: (key, nuxtApp) =>
+      nuxtApp.payload.data[key] || nuxtApp.static.data[key],
+  },
 );
 
+const hasAnimationLoopFinished = shallowRef(false);
 const showSplashScreen = computed(
-  () =>
-    content.value &&
-    content.value.numberOfTasks &&
-    numberOfCompletedTasks.value < content.value.numberOfTasks,
+  () => pending.value || !hasAnimationLoopFinished.value,
 );
 
 watchEffect(() => {
-  if (!content.value)
+  if (!content.value && !pending.value)
     throw showError({
       message: "You tried visiting a non-existent page.",
       status: 404,
