@@ -1,15 +1,13 @@
-<script lang="ts" setup>
-defineProps<{ description: string; title: string }>();
-</script>
-
 <template>
+  <!-- OG image template for social media sharing -->
   <div class="w-full">
     <div class="relative mx-auto h-screen w-[90%] py-20">
-      <h1 class="text-5xl font-extrabold">{{ title }}</h1>
-      <p class="text-4xl">{{ description }}</p>
+      <h1 class="text-5xl font-extrabold">{{ $props.title }}</h1>
+      <p class="text-4xl">{{ $props.description }}</p>
 
+      <!-- Decorative gradient blob -->
       <div
-        class="absolute bottom-20 right-10 h-[200px] w-[200px] rounded-full"
+        class="absolute right-10 bottom-20 size-50 rounded-full"
         style="
           background: linear-gradient(
             45deg,
@@ -21,3 +19,12 @@ defineProps<{ description: string; title: string }>();
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+interface PageProps {
+  description: string;
+  title: string;
+}
+
+defineProps<PageProps>();
+</script>

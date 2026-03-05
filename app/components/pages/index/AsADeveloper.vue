@@ -9,7 +9,7 @@
     <section class="grid place-items-center gap-y-4">
       <ProseH3><b>Featured Projects</b></ProseH3>
 
-      <AppProjects is-featured />
+      <AppProjects />
 
       <UiButton :to="socialLinks[0].url" class="group border-dashed">
         View all

@@ -2,6 +2,7 @@
   <!-- Full-height section with optional two-column layout -->
   <div class="space-y-4">
     <section
+      ref="section-container"
       :class="
         twMerge(
           'relative grid min-h-screen',
@@ -27,5 +28,10 @@ interface SectionProps {
   noDivider?: boolean;
 }
 
+const sectionContainerRef = useTemplateRef("section-container");
+
+defineExpose({
+  sectionContainerRef,
+});
 defineProps<SectionProps>();
 </script>
