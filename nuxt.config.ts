@@ -1,37 +1,82 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      titleTemplate: "%s · Oyedeji Oyewole",
+      link: [
+        {
+          rel: "icon",
+          type: "image/svg+xml",
+          href: "/favicon.svg",
+        },
+      ],
     },
   },
   content: {
-    // highlight: {
-    //   theme: {
-    //     dark: "github-dark",
-    //     default: "github-light",
-    //   },
-    // },
     experimental: { sqliteConnector: "native" },
+    build: {
+      markdown: {
+        highlight: {
+          theme: {
+            dark: "github-dark",
+            default: "github-light",
+          },
+        },
+      },
+    },
   },
   compatibilityDate: "2026-01-10",
   devtools: { enabled: true },
+  image: {
+    github: {},
+    ipx: {},
+    none: {},
+    provider: "ipx",
+  },
   modules: [
     "@nuxt/content",
     "@nuxt/fonts",
+    "@nuxt/image",
     "@nuxtjs/color-mode",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
-    "nuxt-og-image",
+    // "nuxt-og-image",
     "nuxt-phosphor-icons",
+    // "nuxt-security",
   ],
-  notivue: {
-    position: "bottom-center",
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ["/"],
+    },
+  },
+  routeRules: {
+    "/**": { isr: true },
   },
   runtimeConfig: {
     vercel: {
       bearerToken: "",
       initialDeploymentId: "",
     },
+    pexels: {
+      apiKey: "",
+      showcaseCollectionId: "",
+    },
   },
-  site: { url: "https://oyedejioyewole.vercel.app" },
+  // security: {
+  //   headers: {
+  //     contentSecurityPolicy: false,
+  //   },
+  // },
+  // site: { url: "https://oyedejioyewole.vercel.app" },
+  vite: {
+    esbuild: {
+      legalComments: "none",
+    },
+    build: {
+      terserOptions: {
+        format: {
+          comments: false,
+        },
+      },
+    },
+  },
 });
