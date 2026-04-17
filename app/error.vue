@@ -14,7 +14,7 @@
       </ProseH1>
 
       <ProseP class="max-w-md"
-        ><ProseStrong>Reason:</ProseStrong> {{ error.message }}</ProseP
+        ><ProseStrong>Reason:</ProseStrong> {{ $props.error.message }}</ProseP
       >
 
       <ProseA class="mx-auto w-fit" href="/">Go home</ProseA>
@@ -24,6 +24,8 @@
 
 <script lang="ts" setup>
 import type { NuxtError } from "#app";
+
+provide("current-path", useRoute().path);
 
 defineProps<{ error: NuxtError }>();
 </script>
