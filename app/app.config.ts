@@ -1,17 +1,17 @@
 export default defineAppConfig({
   socialLinks: [
     {
-      label: "My GitHub",
+      label: "Go to my GitHub",
       icon: "github-logo",
       url: "https://github.com/oyedejioyewole",
     },
     {
-      label: "My Instagram",
+      label: "Go to my Instagram",
       icon: "instagram-logo",
       url: "https://instagram.com/oyedeji.oyewole",
     },
     {
-      label: "My Pexels profile",
+      label: "Go to my Pexels",
       icon: "pexels-logo",
       url: "https://www.pexels.com/@oyedeji-oyewole-2149239433",
     },
