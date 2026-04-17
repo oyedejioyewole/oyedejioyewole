@@ -43,19 +43,21 @@ export default defineNuxtConfig({
     // "nuxt-security",
   ],
   nitro: {
+    // This prevents errors like ENOTDIR when navigating ISR routes in development
+    // devStorage: {
+    //   cache: {
+    //     driver: "memory",
+    //   },
+    // },
     prerender: {
       crawlLinks: true,
       routes: ["/"],
     },
   },
   routeRules: {
-    "/**": { isr: true },
+    "/api/photos": { isr: 60 * 60 * 24 * 7 }, // 7 days
   },
   runtimeConfig: {
-    // vercel: {
-    //   bearerToken: "",
-    //   initialDeploymentId: "",
-    // },
     pexels: {
       apiKey: "",
       showcaseCollectionId: "",
@@ -77,6 +79,11 @@ export default defineNuxtConfig({
           comments: false,
         },
       },
+    },
+  },
+  $development: {
+    routeRules: {
+      "/api/photos": { swr: true },
     },
   },
 });
