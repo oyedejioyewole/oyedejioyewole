@@ -7,15 +7,19 @@
 
   <AppEffectsCursorTracking />
 
-  <main class="grid min-h-screen grid-cols-5">
+  <main class="grid grid-cols-5">
     <!-- Left Sidebar -->
     <AppNavigation />
 
     <!-- Content -->
-    <main
-      class="ease-in-out-circ col-span-4 mx-auto w-[90%] transition-all duration-300 xl:w-full"
-    >
-      <slot />
+
+    <main class="col-span-5 xl:col-span-4">
+      <div class="relative min-h-screen">
+        <slot />
+      </div>
+
+      <!-- Footer -->
+      <AppFooter v-show="currentPath !== '/'" />
     </main>
   </main>
 </template>
@@ -24,4 +28,6 @@
 useHead({
   titleTemplate: "%s · Oyedeji Oyewole",
 });
+
+const currentPath = inject("current-path") as Ref<string>;
 </script>
