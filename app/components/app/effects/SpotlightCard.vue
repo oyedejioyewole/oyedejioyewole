@@ -1,12 +1,15 @@
 <template>
   <div
     ref="spotlight-card"
+    data-snap-cursor
     :class="
       twMerge(
-        'relative overflow-hidden rounded-3xl border p-8',
+        'relative overflow-hidden p-8',
         $attrs.class as string | undefined,
       )
     "
+    :initial="{ opacity: 0, x: -40 }"
+    :while-in-view="{ opacity: 1, x: 0 }"
     @blur="handleBlur"
     @focus="handleFocus"
     @mouseenter="handleMouseEnter"
@@ -34,13 +37,8 @@ interface Position {
 }
 
 interface SpotlightCardProps {
-  spotlightColor?: string;
+  spotlightColor: string;
 }
-
-withDefaults(defineProps<SpotlightCardProps>(), {
-  spotlightColor:
-    "color-mix(in srgb, var(--color-primary-500), transparent 50%)",
-});
 
 const spotlightCardRef = useTemplateRef("spotlight-card");
 const isFocused = shallowRef(false);
@@ -74,4 +72,6 @@ const handleMouseEnter = () => {
 const handleMouseLeave = () => {
   opacity.value = 0;
 };
+
+defineProps<SpotlightCardProps>();
 </script>
