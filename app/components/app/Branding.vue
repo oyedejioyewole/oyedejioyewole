@@ -2,7 +2,6 @@
   <svg
     data-snap-cursor
     height="635.754"
-    ref="brand-logo"
     viewBox="0 0 225.617 168.21"
     width="852.726"
     xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +13,6 @@
         aria-label="D"
         font-size="118.632"
         fill="currentColor"
-        fill-opacity="0"
         stroke="currentColor"
         stroke-width="2"
       />
@@ -24,7 +22,6 @@
         aria-label="J"
         font-size="141.116"
         fill="currentColor"
-        fill-opacity="0"
         stroke="currentColor"
         stroke-width="2"
       />
@@ -37,7 +34,6 @@
         font-size="165.183"
         font-family="Delius Swash Caps"
         fill="currentColor"
-        fill-opacity="0"
         stroke="currentColor"
         stroke-width="2"
       />
@@ -48,62 +44,9 @@
         font-size="169.909"
         font-family="Delius Swash Caps"
         fill="currentColor"
-        fill-opacity="0"
         stroke="currentColor"
         stroke-width="2"
       />
     </g>
   </svg>
 </template>
-
-<script lang="ts" setup>
-import { animate, type JSAnimation } from "animejs/animation";
-import { onScroll } from "animejs/events";
-import { createDrawable } from "animejs/svg";
-
-const props = defineProps<{ isLoading?: boolean }>();
-
-const svgDrawableAnimation = shallowRef<JSAnimation>();
-
-const brandLogoRef = useTemplateRef("brand-logo");
-whenever(brandLogoRef, (element) => {
-  if (!element) return;
-
-  const svgPaths = element.querySelectorAll("path");
-  const svgDrawable = createDrawable(svgPaths);
-  if (!svgDrawable) return;
-
-  const drawStartEnd = ["0 0", "0 1"];
-
-  if (props.isLoading) drawStartEnd.push("1 1");
-
-  svgDrawableAnimation.value = animate(svgDrawable, {
-    autoplay: onScroll({
-      container: "[data-scroll-container]",
-      target: element,
-    }),
-    draw: drawStartEnd,
-    duration: 2500,
-    ease: "out(3)",
-    loop: props.isLoading,
-    onComplete() {
-      animate(svgPaths, {
-        fillOpacity: 1,
-        ease: "out(3)",
-        duration: 800,
-      });
-    },
-  });
-
-  // Unblur in the SVG content while drawing
-  animate(element, {
-    duration: 2000,
-    ease: "out(3)",
-    filter: "blur(0px)",
-  });
-});
-
-defineExpose({
-  svgDrawableAnimation,
-});
-</script>
