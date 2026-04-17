@@ -2,6 +2,24 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  :root {
+    --spotlight-color: color-mix(
+      in srgb,
+      var(--color-primary-700),
+      transparent 50%
+    );
+  }
+
+  .dark {
+    --spotlight-color: color-mix(
+      in srgb,
+      var(--color-primary-300),
+      transparent 70%
+    );
+  }
+}
+
 @theme {
   /* Colors */
   --color-primary-50: oklch(0.956 0.009 52.17);
