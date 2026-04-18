@@ -7,7 +7,7 @@
         twMerge(
           'relative grid min-h-screen',
           $props.multiColumn
-            ? 'place-items-center max-xl:grid-rows-2 xl:grid-cols-2'
+            ? 'place-items-center xl:grid-cols-2'
             : 'mx-auto flex max-w-lg flex-col items-center justify-center gap-y-8 text-center',
           $attrs.class as string | undefined,
         )
