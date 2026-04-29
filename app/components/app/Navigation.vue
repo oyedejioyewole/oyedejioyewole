@@ -2,36 +2,31 @@
   <!-- Links -->
   <div class="max-xl:col-span-5">
     <!-- Mobile: animated overlay, only mounted when toggled -->
-    <AnimatePresence>
-      <motion.nav
-        v-if="isNavigationToggled"
-        class="group bg-primary-100 dark:bg-primary-900 fixed top-0 z-10 grid h-screen w-full rounded-b-xl border backdrop-blur-md"
-        layout
-        :initial="{ y: '-100%' }"
-        :animate="{ y: 0 }"
-        :transition="{ type: 'tween' }"
-        :exit="{
-          y: isNavigationToggled ? '100%' : '-100%',
-        }"
+    <AnimatePresence @exit-complete="pathTransition.exit?.(onNavigationClosed)">
+      <nav
+        v-show="isNavigationToggled"
+        class="group dark:text-primary-700 text-primary-300 fixed top-0 z-20 grid h-dvh w-full"
       >
-        <div class="row-span-3 grid place-content-center gap-y-8">
-          <motion.h1 class="font-serif text-4xl">MENU</motion.h1>
+        <ul class="row-span-2 grid place-items-center">
+          <motion.li
+            v-for="(link, index) in navigationLinks"
+            :key="link.name"
+            :initial="{ opacity: 0, y: 40 }"
+            :animate="{ opacity: 1, y: 0 }"
+            :exit="{ opacity: 0, y: 40 }"
+            :transition="{ duration: 0.3, delay: index * 0.05 }"
+          >
+            <NuxtLink
+              class="inline-flex items-center gap-x-4 font-serif text-4xl"
+              :to="link.to"
+              @click="pathTransition.skipTransition = true"
+            >
+              {{ link.label }}
+            </NuxtLink>
+          </motion.li>
+        </ul>
 
-          <hr
-            class="w-full border transition-[width] duration-300 group-hover:w-full"
-          />
-
-          <ul class="flex flex-col gap-4">
-            <li v-for="link in navigationLinks" :key="link.name">
-              <UiButton :is-active="$route.path === link.to" :to="link.to">
-                <PhosphorIcon class="size-5" :name="link.icon" />
-                <span>{{ link.label }}</span>
-              </UiButton>
-            </li>
-          </ul>
-        </div>
-
-        <div class="mx-auto space-y-4 p-8">
+        <div class="mx-auto space-y-4 self-center">
           <UiButton
             @click="
               $colorMode.preference =
@@ -64,30 +59,32 @@
             ><PhosphorIcon class="size-5" name="x"
           /></UiButton>
         </div>
-      </motion.nav>
+      </nav>
     </AnimatePresence>
 
     <!-- Mobile header bar -->
-    <nav class="flex w-full items-center justify-between xl:hidden">
-      <AppBranding class="size-10" />
+    <nav class="mt-[4dvh] grid grid-cols-12 xl:hidden">
+      <div class="col-[2/12] flex items-center justify-between">
+        <AppBranding class="size-10" />
 
-      <UiButton @click="isNavigationToggled = true">
-        <PhosphorIcon class="size-5" name="list" />
-      </UiButton>
+        <UiButton @click="pathTransition.enter?.(onNavigationOpened)">
+          <PhosphorIcon class="size-5" name="list" />
+        </UiButton>
+      </div>
     </nav>
 
     <!-- Desktop: always in the DOM, visible via CSS only — no JS, no flash -->
     <nav
       class="sticky top-0 hidden h-screen place-items-center border-r border-current/30 backdrop-blur-md transition-colors hover:border-current/70 xl:grid"
     >
-      <ul class="flex flex-wrap justify-center gap-2">
+      <ul class="flex flex-wrap justify-center gap-y-2">
         <li
           v-for="(link, index) in navigationLinks"
           :key="link.name"
-          class="inline-flex items-center gap-x-2"
+          class="inline-flex items-center"
         >
           <NuxtLink
-            class="inline-flex items-center gap-x-2 font-serif text-xl"
+            class="inline-flex items-center gap-x-2 font-serif"
             :to="link.to"
           >
             <PhosphorIcon class="size-6" weight="duotone" :name="link.icon" />
@@ -102,29 +99,6 @@
           />
         </li>
       </ul>
-      <!-- <div class="flex items-center gap-x-4">
-        <NuxtLink
-          v-for="social in socialLinks"
-          :key="social.icon"
-          class="rounded-full px-3 py-1 outline-offset-8 hover:outline"
-          data-snap-cursor
-          target="_blank"
-          :to="social.url"
-        >
-          <span class="sr-only">{{ social.label }}</span>
-          <UiPexelsLogo
-            v-if="social.icon === 'pexels-logo'"
-            class="size-5 fill-current/20"
-          />
-
-          <PhosphorIcon
-            v-else
-            class="size-5.5"
-            weight="duotone"
-            :name="social.icon"
-          />
-        </NuxtLink>
-      </div> -->
 
       <AppBranding class="row-span-3 size-20" />
 
@@ -163,9 +137,12 @@
 
 <script lang="ts" setup>
 import { AnimatePresence, motion } from "motion-v";
+import type { PathTransitionExposeT } from "~/layouts/default.vue";
 
 const isNavigationToggled = shallowRef(false);
+
 const currentPath = inject("current-path") as Ref<string>;
+const pathTransition = inject("path-transition") as PathTransitionExposeT;
 
 const navigationLinks = computed(() =>
   [
@@ -179,4 +156,18 @@ const navigationLinks = computed(() =>
     },
   ].filter((link) => link.to !== currentPath.value),
 );
+
+const nuxtApp = useNuxtApp();
+
+nuxtApp.hook("page:loading:end", () => {
+  isNavigationToggled.value = false;
+});
+
+function onNavigationOpened() {
+  isNavigationToggled.value = true;
+}
+
+function onNavigationClosed() {
+  currentPath.value = nuxtApp._route.path;
+}
 </script>
