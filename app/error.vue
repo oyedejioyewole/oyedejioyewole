@@ -13,7 +13,7 @@
         {{ $props.error.status }}
       </ProseH1>
 
-      <ProseP class="max-w-md"
+      <ProseP class="max-w-sm text-pretty"
         ><ProseStrong>Reason:</ProseStrong> {{ $props.error.message }}</ProseP
       >
 
@@ -24,8 +24,6 @@
 
 <script lang="ts" setup>
 import type { NuxtError } from "#app";
-
-provide("current-path", useRoute().path);
 
 defineProps<{ error: NuxtError }>();
 </script>

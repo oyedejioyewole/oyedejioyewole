@@ -2,7 +2,7 @@
   <footer
     class="flex flex-wrap items-center justify-around gap-y-8 border-t border-current/30 p-8 backdrop-blur-md transition duration-300 hover:border-current/70"
   >
-    <div class="space-y-2">
+    <div class="space-y-2 max-md:text-center">
       Made with ♥️ while using 🎧
 
       <ProseP class="font-bold" has-accent>

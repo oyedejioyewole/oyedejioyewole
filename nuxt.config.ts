@@ -49,10 +49,10 @@ export default defineNuxtConfig({
     //     driver: "memory",
     //   },
     // },
-    prerender: {
-      crawlLinks: true,
-      routes: ["/"],
-    },
+    // prerender: {
+    //   crawlLinks: true,
+    //   routes: ["/"],
+    // },
   },
   routeRules: {
     "/api/photos": { isr: 60 * 60 * 24 * 7 }, // 7 days

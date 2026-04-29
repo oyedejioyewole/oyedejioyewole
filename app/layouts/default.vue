@@ -5,6 +5,7 @@
     class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 selection:bg-primary-500/50 cursor-crosshair overflow-x-hidden"
   />
 
+  <AppEffectsPathTransition ref="transition" />
   <AppEffectsCursorTracking />
 
   <main class="grid grid-cols-5">
@@ -12,10 +13,12 @@
     <AppNavigation />
 
     <!-- Content -->
-
     <main class="col-span-5 xl:col-span-4">
       <div class="relative min-h-screen">
-        <slot />
+        <slot
+          :path-transition="pathTransition"
+          :update-current-path="updateCurrentPath"
+        />
       </div>
 
       <!-- Footer -->
@@ -29,5 +32,23 @@ useHead({
   titleTemplate: "%s · Oyedeji Oyewole",
 });
 
-const currentPath = inject("current-path") as Ref<string>;
+const transitionRef = useTemplateRef("transition");
+const pathTransition = computed(() => {
+  return {
+    skipTransition: false,
+    ...(transitionRef.value && {
+      enter: transitionRef.value.enter,
+      exit: transitionRef.value.exit,
+    }),
+  };
+});
+provide("path-transition", pathTransition);
+
+const { currentPath, route } = useCurrentPath();
+
+function updateCurrentPath() {
+  currentPath.value = route.path;
+}
+
+export type PathTransitionExposeT = typeof pathTransition;
 </script>

@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     abortNavigation({
       status: 404,
       statusText: "Page not found",
-      message: "You tried visiting a non-existent page.",
+      message: `You tried visiting a non-existent page [${to.path}]`,
     });
   }
 
