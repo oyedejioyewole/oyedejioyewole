@@ -17,7 +17,7 @@
       <div class="relative min-h-screen">
         <slot
           :path-transition="pathTransition"
-          @update-route-path="updateCurrentPath"
+          :update-current-path="updateCurrentPath"
         />
       </div>
 
@@ -44,9 +44,7 @@ const pathTransition = computed(() => {
 });
 provide("path-transition", pathTransition);
 
-const route = useRoute();
-const currentPath = shallowRef(route.path);
-provide("current-path", currentPath);
+const { currentPath, route } = useCurrentPath();
 
 function updateCurrentPath() {
   currentPath.value = route.path;

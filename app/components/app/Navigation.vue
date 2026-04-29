@@ -141,9 +141,9 @@ import type { PathTransitionExposeT } from "~/layouts/default.vue";
 
 const isNavigationToggled = shallowRef(false);
 
-const currentPath = inject("current-path") as Ref<string>;
 const pathTransition = inject("path-transition") as PathTransitionExposeT;
 
+const { currentPath, route } = useCurrentPath();
 const navigationLinks = computed(() =>
   [
     { to: "/", name: "index", label: "Home", icon: "house-simple" },
@@ -158,16 +158,15 @@ const navigationLinks = computed(() =>
 );
 
 const nuxtApp = useNuxtApp();
-
 nuxtApp.hook("page:loading:end", () => {
   isNavigationToggled.value = false;
 });
 
-function onNavigationOpened() {
-  isNavigationToggled.value = true;
+function onNavigationClosed() {
+  currentPath.value = route.path;
 }
 
-function onNavigationClosed() {
-  currentPath.value = nuxtApp._route.path;
+function onNavigationOpened() {
+  isNavigationToggled.value = true;
 }
 </script>
