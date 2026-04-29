@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-4">
+  <div class="grid gap-4 lg:grid-cols-3">
     <AppEffectsSpotlightCard
       v-for="(project, index) in projects"
       :key="project.name"
@@ -7,7 +7,7 @@
       :class="[
         'group flex flex-col items-start gap-y-4 rounded-2xl border border-current/30 bg-current/10 backdrop-blur-sm transition-all duration-300 hover:border-current/70',
         project.url && 'cursor-pointer',
-        [0, 3, 4].includes(index) && 'col-span-2',
+        [0, 3, 4].includes(index) && 'lg:col-span-2',
       ]"
       spotlight-color="var(--spotlight-color)"
       @click="navigateTo(project.url, { external: true })"
@@ -58,13 +58,15 @@ const { data: projects } = useLazyAsyncData("featuredProjects", async () => {
   const allProjects = await queryCollection("projects").all();
 
   const transformedProjects = await Promise.all(
-    allProjects.map(async (project) => ({
-      ...project,
-      description: await parseMarkdown(project.description),
-    })),
+    __shuffleArray(allProjects)
+      .slice(0, 6)
+      .map(async (project) => ({
+        ...project,
+        description: await parseMarkdown(project.description),
+      })),
   );
 
-  return transformedProjects.sort(() => 0.5 - Math.random()).slice(0, 6);
+  return transformedProjects;
 });
 
 export type Projects = NonNullable<UnwrapRef<typeof projects>>;

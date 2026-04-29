@@ -1,9 +1,11 @@
 <template>
-  <section class="grid min-h-screen grid-cols-8">
-    <section class="col-[2/8]">
-      <div class="flex h-[33.33vh] items-center justify-between">
-        <div class="flex w-full items-end justify-between">
-          <div class="max-w-md space-y-8">
+  <section class="grid min-h-screen grid-cols-12 xl:grid-cols-8">
+    <section class="col-[2/12] xl:col-[2/8]">
+      <div class="flex h-[50vh] items-center">
+        <div
+          class="flex w-full justify-between gap-y-8 max-xl:flex-col xl:items-end"
+        >
+          <div class="space-y-8 xl:max-w-md">
             <slot />
           </div>
 
@@ -29,10 +31,10 @@
 
       <!-- Photo showcase -->
       <section
-        class="mb-[16.65vh] grid place-items-center space-y-4 rounded-2xl border border-current/30 bg-current/10 p-8 backdrop-blur-lg transition duration-300 hover:border-current/70"
+        class="group mb-[16.65vh] grid place-items-center space-y-4 rounded-2xl border border-current/30 bg-current/10 p-8 backdrop-blur-lg transition duration-300 hover:border-current/70"
         data-snap-cursor
       >
-        <div v-if="resolvedMedia" class="columns-2 space-y-4">
+        <div v-if="resolvedMedia" class="space-y-4 md:columns-2">
           <motion.button
             v-for="photo in resolvedMedia.media.slice(startIndex, endIndex)"
             :key="photo!.id"
@@ -55,6 +57,11 @@
               :src="photo!.src"
             />
           </motion.button>
+        </div>
+        <div v-else>
+          <AppBranding
+            class="size-20 opacity-70 transition duration-300 group-hover:opacity-100"
+          />
         </div>
       </section>
     </section>
