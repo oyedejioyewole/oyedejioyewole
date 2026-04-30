@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="pointerType === 'mouse'"
     ref="cursor-sprite"
     :class="
       twMerge([

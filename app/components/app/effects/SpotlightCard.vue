@@ -8,8 +8,6 @@
         $attrs.class as string | undefined,
       )
     "
-    :initial="{ opacity: 0, x: -40 }"
-    :while-in-view="{ opacity: 1, x: 0 }"
     @blur="handleBlur"
     @focus="handleFocus"
     @mouseenter="handleMouseEnter"
@@ -17,7 +15,7 @@
     @mousemove="handleMouseMove"
   >
     <div
-      class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
+      class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
       :style="{
         opacity,
         background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,
