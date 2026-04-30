@@ -14,7 +14,7 @@
 
     <!-- Content -->
     <main class="col-span-5 xl:col-span-4">
-      <div class="relative min-h-screen">
+      <div class="relative">
         <slot
           :path-transition="pathTransition"
           :update-current-path="updateCurrentPath"

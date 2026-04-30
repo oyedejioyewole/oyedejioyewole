@@ -3,7 +3,7 @@
     class="grid min-h-screen grid-cols-8 place-content-center items-start"
   >
     <div class="col-[2/8] space-y-8">
-      <h3 class="font-display text-5xl">My stats.</h3>
+      <ProseH1>My stats.</ProseH1>
 
       <div
         class="group grid min-h-[50vh] gap-4 rounded-2xl border-current/30 backdrop-blur-lg transition-[gap] duration-300 hover:gap-0 hover:border-current/70 lg:grid-cols-2"
