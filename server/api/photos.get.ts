@@ -46,7 +46,7 @@ export default defineEventHandler(async () => {
         return {
           id: item.id,
           externalUrl: item.url,
-          src: item.src.original,
+          src: item.src.large2x,
         };
       })
       .filter(Boolean),

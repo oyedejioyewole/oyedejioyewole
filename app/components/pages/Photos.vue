@@ -51,7 +51,7 @@
           >
             <NuxtImg
               class="brightness-90 transition duration-300 hover:brightness-100"
-              format="avif,webp"
+              format="webp"
               placeholder
               width="960"
               :src="photo!.src"
