@@ -2,7 +2,7 @@
 title: Home
 ---
 
-::PagesLanding
+::PagesHome
 
 # Hey, I'm Oyedeji.
 
