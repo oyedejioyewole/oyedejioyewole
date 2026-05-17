@@ -1,49 +1,56 @@
 <template>
-  <div class="grid gap-4 lg:grid-cols-3">
-    <AppEffectsSpotlightCard
+  <ul class="grid gap-4 lg:grid-cols-3">
+    <li
       v-for="(project, index) in projects"
       v-if="projects"
       :key="project.name"
-      data-snap-cursor
-      :class="[
-        'group flex flex-col items-start gap-y-4 rounded-2xl border border-current/30 bg-current/10 backdrop-blur-sm transition-all duration-300 hover:border-current/70',
-        project.url && 'cursor-pointer',
-        [0, 3, 4].includes(index) && 'lg:col-span-2',
-      ]"
-      spotlight-color="var(--spotlight-color)"
-      @click="
-        navigateTo(project.url, { external: true, open: { target: '_blank' } })
-      "
+      class="contents"
     >
-      <!-- Project status badge and external link indicator -->
-      <div class="flex w-full items-center justify-between">
-        <div
-          class="bg-primary-900/10 dark:bg-primary-100/10 inline-flex w-fit items-center gap-x-2 rounded-full px-3 py-1 max-2xl:text-sm"
-        >
-          <NuxtIcon size="20" :name="project.icon" />
+      <AppEffectsSpotlightCard
+        data-snap-cursor
+        :class="[
+          'group flex flex-col items-start gap-y-4 rounded-2xl border border-current/30 bg-current/10 backdrop-blur-sm transition-all duration-300 hover:border-current/70',
+          project.url && 'cursor-pointer',
+          [0, 3, 4].includes(index) && 'lg:col-span-2',
+        ]"
+        spotlight-color="var(--spotlight-color)"
+        @click="
+          navigateTo(project.url, {
+            external: true,
+            open: { target: '_blank' },
+          })
+        "
+      >
+        <!-- Project status badge and external link indicator -->
+        <div class="flex w-full items-center justify-between">
+          <div
+            class="bg-primary-900/10 dark:bg-primary-100/10 inline-flex w-fit items-center gap-x-2 rounded-full px-3 py-1 max-2xl:text-sm"
+          >
+            <NuxtIcon size="20" :name="project.icon" />
 
-          {{ project.isDraft ? "In progress" : "Completed" }}
+            {{ project.isDraft ? "In progress" : "Completed" }}
+          </div>
+
+          <!-- Arrow icon shown on hover if project has external URL -->
+          <NuxtIcon
+            v-if="project.url"
+            class="-translate-x-1 translate-y-1 scale-0 transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-100"
+            name="ph:arrow-up-right"
+            size="20"
+          />
         </div>
 
-        <!-- Arrow icon shown on hover if project has external URL -->
-        <NuxtIcon
-          v-if="project.url"
-          class="-translate-x-1 translate-y-1 scale-0 transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-100"
-          name="ph:arrow-up-right"
-          size="20"
-        />
-      </div>
+        <p
+          class="font-bold group-hover:font-serif group-hover:tracking-wider group-hover:italic"
+        >
+          {{ project.displayName ?? project.name }}
+        </p>
 
-      <p
-        class="font-bold group-hover:font-serif group-hover:tracking-wider group-hover:italic"
-      >
-        {{ project.displayName ?? project.name }}
-      </p>
+        <ContentRenderer class="text-left" :value="project.description" />
+      </AppEffectsSpotlightCard>
+    </li>
 
-      <ContentRenderer class="text-left" :value="project.description" />
-    </AppEffectsSpotlightCard>
-
-    <div
+    <li
       v-else
       v-for="(, index) in 6"
       :key="index"
@@ -52,7 +59,7 @@
         [0, 3, 4].includes(index) && 'lg:col-span-2',
       ]"
     />
-  </div>
+  </ul>
 </template>
 
 <script lang="ts" setup>

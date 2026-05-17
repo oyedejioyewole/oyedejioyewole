@@ -11,28 +11,29 @@
     </div>
 
     <div class="grid place-items-center gap-y-4">
-      <ul class="flex items-center gap-x-4">
-        <NuxtLink
-          v-for="social in socialLinks"
-          :key="social.icon"
-          class="rounded-full px-3 py-1 outline-offset-8 hover:outline"
-          data-snap-cursor
-          target="_blank"
-          :to="social.url"
-        >
-          <span class="sr-only">{{ social.label }}</span>
-          <UiPexelsLogo
-            v-if="social.icon === 'pexels-logo'"
-            class="size-5 fill-current/20"
-          />
+      <ul class="flex gap-x-4">
+        <li v-for="social in socialLinks" :key="social.icon">
+          <NuxtLink
+            class="inline-block rounded-full px-3 outline-offset-8 hover:outline"
+            data-snap-cursor
+            target="_blank"
+            :to="social.url"
+          >
+            <span class="sr-only">{{ social.label }}</span>
 
-          <NuxtIcon v-else class="size-5.5" :name="social.icon" />
-        </NuxtLink>
+            <UiPexelsLogo
+              v-if="social.icon === 'pexels-logo'"
+              class="size-5 fill-current/20"
+            />
+
+            <NuxtIcon v-else :name="social.icon" class="size-5.5" />
+          </NuxtLink>
+        </li>
       </ul>
 
-      <p class="font-serif font-bold"><i>or</i></p>
+      <p class="font-serif font-bold italic">or</p>
 
-      <Motion as-child :while-press="{ scale: 0.9 }">
+      <Motion :while-press="{ scale: 0.9 }" as-child>
         <NuxtLink
           class="group hover:text-primary-300 dark:hover:text-primary-700 dark:before:bg-primary-300 before:bg-primary-700 relative isolate flex cursor-pointer items-center gap-x-4 overflow-hidden rounded-full bg-current/10 px-5 py-3 duration-300 before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:rounded-full before:transition before:duration-300 hover:before:scale-x-100"
           data-snap-cursor

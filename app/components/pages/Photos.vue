@@ -16,6 +16,7 @@
               @click="prev"
             >
               <NuxtIcon name="ph:caret-left" />
+              <span class="sr-only">Previous page</span>
             </button>
 
             <button
@@ -24,6 +25,7 @@
               @click="next"
             >
               <NuxtIcon name="ph:caret-right" />
+              <span class="sr-only">Next page</span>
             </button>
           </div>
         </div>
@@ -34,31 +36,32 @@
         class="group mb-[16.65vh] grid place-items-center space-y-4 rounded-2xl border border-current/30 bg-current/10 p-8 backdrop-blur-lg transition duration-300 hover:border-current/70"
         data-snap-cursor
       >
-        <div v-if="resolvedMedia" class="space-y-4 md:columns-2">
+        <ul v-if="resolvedMedia" class="space-y-4 md:columns-2">
           <Motion
-            as="button"
-            v-for="photo in resolvedMedia.media.slice(startIndex, endIndex)"
+            as="li"
+            v-for="(photo, index) in resolvedMedia.media.slice(
+              startIndex,
+              endIndex,
+            )"
             :key="photo!.id"
             data-morph-cursor
             :initial="{ opacity: 0, y: 40 }"
             :animate="{ opacity: 1, y: 0 }"
-            @press="
-              navigateTo(photo!.externalUrl, {
-                external: true,
-                open: { target: '_blank' },
-              })
-            "
+            :transition="{ delay: 0.1 * index }"
           >
-            <NuxtImg
-              class="brightness-70 transition duration-300 hover:brightness-100"
-              format="webp"
-              placeholder
-              placeholder-class="border border-current/30 aspect-[3/4] bg-current/10"
-              width="960"
-              :src="photo!.src"
-            />
+            <NuxtLink target="_blank" :to="photo!.externalUrl">
+              <NuxtImg
+                class="brightness-70 transition duration-300 hover:brightness-100"
+                format="webp"
+                placeholder
+                placeholder-class="border border-current/30 aspect-[3/4] bg-current/10"
+                width="960"
+                :alt="`Pexels ID: ${photo!.id}`"
+                :src="photo!.src"
+              />
+            </NuxtLink>
           </Motion>
-        </div>
+        </ul>
         <AppBranding
           v-else
           class="size-20 opacity-70 transition duration-300 group-hover:opacity-100"

@@ -51,9 +51,10 @@
             </ColorScheme>
           </UiButton>
 
-          <UiButton @click="isNavigationToggled = false"
-            ><NuxtIcon class="size-5" name="ph:x"
-          /></UiButton>
+          <UiButton @click="isNavigationToggled = false">
+            <NuxtIcon class="size-5" name="ph:x" />
+            <span class="sr-only">Close mobile menu</span>
+          </UiButton>
         </div>
       </nav>
     </AnimatePresence>
@@ -65,6 +66,7 @@
 
         <UiButton @click="$emit('navigation:open', onNavigationOpened)">
           <NuxtIcon class="size-5" name="ph:list" />
+          <span class="sr-only">Open mobile menu</span>
         </UiButton>
       </div>
     </nav>
@@ -82,6 +84,7 @@
           <NuxtLink
             class="inline-flex items-center gap-x-2 font-serif"
             :to="link.to"
+            data-snap-cursor
           >
             <NuxtIcon :name="link.icon" />
             {{ link.label }}
