@@ -6,6 +6,6 @@ title: Home
 
 # Hey, I'm Oyedeji.
 
-[And I'm a [_developer_](#) & [_photographer_](#) based in **Abuja, Nigeria.**]{.font-serif .text-2xl}
+[And I'm a [_developer_](/projects) & [_photographer_](/photos) based in **Abuja, Nigeria.**]{.font-serif .text-2xl}
 
 ::
