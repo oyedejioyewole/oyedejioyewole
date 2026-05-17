@@ -6,10 +6,10 @@
       :animate="{ opacity: 1, scale: 1 }"
       :exit="{ opacity: 0, scale: 0 }"
       :class="
-        twMerge([
+        twMerge(
           'pointer-events-none fixed grid aspect-square h-20 place-items-center rounded-full border',
           shouldMorph ? 'z-10 border-0 bg-current' : '-z-10 border-dashed',
-        ])
+        )
       "
       :style="{
         x: replicatedX,

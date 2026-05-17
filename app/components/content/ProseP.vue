@@ -3,7 +3,7 @@
     :class="
       twMerge(
         'text-primary-900 dark:text-primary-100 leading-relaxed',
-        hasAccent && 'text-current dark:text-current',
+        hasAccent && 'text-current',
         $attrs.class as string | undefined,
       )
     "
