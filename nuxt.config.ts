@@ -23,11 +23,6 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
-  experimental: {
-    componentIslands: {
-      selectiveClient: true,
-    },
-  },
   icon: {
     clientBundle: {
       scan: true,
