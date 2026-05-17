@@ -3,6 +3,7 @@ export const usePhotos = () => {
     getCachedData: (key, nuxtApp) =>
       nuxtApp.payload.data[key] || nuxtApp.static.data[key],
     key: "photos",
+    server: false,
     transform: (response) => {
       return {
         ...response,

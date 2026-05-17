@@ -1,5 +1,5 @@
 {
-  "name": "site",
+  "name": "my-portfolio",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,19 +11,18 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@iconify-json/devicon": "^1.2.62",
+    "@iconify-json/ph": "^1.2.2",
     "@nuxt/content": "3.13.0",
     "@nuxt/fonts": "0.14.0",
+    "@nuxt/icon": "2.2.2",
     "@nuxt/image": "2.0.0",
     "@nuxtjs/color-mode": "^4.0.0",
     "@nuxtjs/tailwindcss": "7.0.0-beta.1",
-    "@upstash/redis": "^1.37.0",
-    "animejs": "^4.4.0",
     "locomotive-scroll": "5.0.1",
     "motion-v": "^2.2.1",
-    "nuxt": "^4.4.2",
+    "nuxt": "^4.4.4",
     "nuxt-og-image": "6.4.8",
-    "nuxt-phosphor-icons": "^2.3.3",
-    "nuxt-security": "2.5.1",
     "pexels": "^1.4.0",
     "tailwind-merge": "^3.5.0",
     "vue": "^3.5.33",
@@ -31,12 +30,17 @@
   },
   "devDependencies": {
     "@inquirer/prompts": "^8.4.2",
+    "@types/js-yaml": "^4.0.9",
     "@vueuse/core": "^14.2.1",
     "@vueuse/nuxt": "^14.2.1",
     "consola": "^3.4.2",
+    "js-yaml": "^4.1.1",
     "nanoid": "^5.1.9",
     "package-directory": "^8.2.0",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0"
+  },
+  "optionalDependencies": {
+    "@types/node": "^25.8.0"
   }
 }

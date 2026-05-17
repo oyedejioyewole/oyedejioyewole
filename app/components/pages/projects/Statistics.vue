@@ -15,7 +15,7 @@
           <span>I've completed</span>
           <p class="font-display text-3xl lg:text-5xl">
             <ClientOnly>
-              {{ projectsStatistics?.completed }}
+              {{ projectsStatistics?.completed ?? "xx" }}
 
               <template #placeholder> xx </template>
             </ClientOnly>
@@ -29,7 +29,7 @@
           <span>I'm currently working on</span>
           <p class="font-display text-3xl lg:text-5xl">
             <ClientOnly>
-              {{ projectsStatistics?.inProgress }}
+              {{ projectsStatistics?.inProgress ?? "xx" }}
 
               <template #placeholder> xx </template>
             </ClientOnly>
@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Projects } from "../../app/Projects.vue";
+import type { Projects } from "./Grid.vue";
 
 const { data: featuredProjects } = useNuxtData<Projects>("featuredProjects");
 

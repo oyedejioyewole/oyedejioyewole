@@ -15,7 +15,7 @@
               :disabled="isFirstPage"
               @click="prev"
             >
-              <PhosphorIcon name="caret-left" />
+              <NuxtIcon name="ph:caret-left" />
             </button>
 
             <button
@@ -23,7 +23,7 @@
               :disabled="isLastPage"
               @click="next"
             >
-              <PhosphorIcon name="caret-right" />
+              <NuxtIcon name="ph:caret-right" />
             </button>
           </div>
         </div>
@@ -35,7 +35,8 @@
         data-snap-cursor
       >
         <div v-if="resolvedMedia" class="space-y-4 md:columns-2">
-          <motion.button
+          <Motion
+            as="button"
             v-for="photo in resolvedMedia.media.slice(startIndex, endIndex)"
             :key="photo!.id"
             class="rounded-4xl outline-offset-4 outline-current"
@@ -56,7 +57,7 @@
               width="960"
               :src="photo!.src"
             />
-          </motion.button>
+          </Motion>
         </div>
         <div v-else>
           <AppBranding
@@ -69,8 +70,6 @@
 </template>
 
 <script lang="ts" setup>
-import { motion } from "motion-v";
-
 const { data: resolvedMedia } = usePhotos();
 const totalMedia = computed(() => resolvedMedia.value?.totalMedia ?? 0);
 

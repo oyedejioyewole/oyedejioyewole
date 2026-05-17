@@ -15,9 +15,9 @@
               :to="socialLinks[0].url"
             >
               View all
-              <PhosphorIcon
+              <NuxtIcon
                 class="size-5 transition duration-300 group-hover:-rotate-45"
-                name="arrow-right"
+                name="ph:arrow-right"
               />
             </NuxtLink>
           </Motion>

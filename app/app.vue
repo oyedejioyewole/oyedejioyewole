@@ -1,15 +1,13 @@
 <template>
-  <AppEffectsPathTransition ref="transition" />
-
-  <NuxtLayout v-slot="{ pathTransition, updateCurrentPath }">
+  <NuxtLayout v-slot="{ skipPathTransition, pageTransition }">
     <NuxtPage
       :transition="
-        !pathTransition.skipTransition && {
+        !skipPathTransition && {
           css: false,
-          onAfterLeave: updateCurrentPath,
-          onLeave: (_, done) => pathTransition.enter?.(done),
-          onEnter: (_, done) => pathTransition.exit?.(done),
           mode: 'out-in',
+          onAfterLeave: pageTransition?.onAfterLeave,
+          onLeave: (_, done) => pageTransition?.onLeave(done),
+          onEnter: (_, done) => pageTransition?.onEnter(done),
         }
       "
     />

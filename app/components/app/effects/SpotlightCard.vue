@@ -1,5 +1,5 @@
 <template>
-  <div
+  <button
     ref="spotlight-card"
     data-snap-cursor
     :class="
@@ -23,7 +23,7 @@
     />
 
     <slot />
-  </div>
+  </button>
 </template>
 
 <script lang="ts" setup>

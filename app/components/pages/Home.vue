@@ -7,11 +7,16 @@
     >
       <!-- Identity x profile picture -->
       <NuxtImg
-        class="size-40 rounded-lg outline outline-offset-4 transition duration-300 outline-dashed hover:-translate-y-2 hover:rotate-5 hover:outline-solid"
-        data-snap-cursor
+        alt="A young lad."
+        class="size-40 rounded-lg outline outline-offset-4 transition duration-300 outline-dashed hover:-translate-y-2 hover:scale-110 hover:rotate-5 hover:outline-solid"
+        data-morph-cursor
+        fetchpriority="high"
         format="webp"
         placeholder
+        preload
         provider="github"
+        height="160px"
+        width="160px"
         src="oyedejioyewole"
       />
 

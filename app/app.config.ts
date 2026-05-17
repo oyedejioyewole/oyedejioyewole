@@ -2,12 +2,12 @@ export default defineAppConfig({
   socialLinks: [
     {
       label: "Go to my GitHub",
-      icon: "github-logo",
+      icon: "ph:github-logo-duotone",
       url: "https://github.com/oyedejioyewole",
     },
     {
       label: "Go to my Instagram",
-      icon: "instagram-logo",
+      icon: "ph:instagram-logo-duotone",
       url: "https://instagram.com/oyedeji.oyewole",
     },
     {

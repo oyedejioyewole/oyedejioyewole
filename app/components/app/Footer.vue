@@ -26,12 +26,7 @@
             class="size-5 fill-current/20"
           />
 
-          <PhosphorIcon
-            v-else
-            class="size-5.5"
-            weight="duotone"
-            :name="social.icon"
-          />
+          <NuxtIcon v-else class="size-5.5" :name="social.icon" />
         </NuxtLink>
       </ul>
 
@@ -45,7 +40,7 @@
           to="mailto://oyedejioyewole.q4e75@passinbox.com"
         >
           Drop a message
-          <PhosphorIcon class="size-5 transition duration-300" name="mailbox" />
+          <NuxtIcon class="size-5 transition duration-300" name="ph:mailbox" />
         </NuxtLink>
       </Motion>
     </div>
@@ -53,7 +48,5 @@
 </template>
 
 <script lang="ts" setup>
-import { Motion } from "motion-v";
-
 const { socialLinks } = useAppConfig();
 </script>

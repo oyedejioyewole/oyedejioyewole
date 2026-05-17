@@ -1,30 +1,40 @@
 export default defineNuxtConfig({
+  $development: {
+    routeRules: {
+      "/api/photos": { swr: true },
+    },
+  },
   app: {
     head: {
       link: [
         {
+          href: "/favicon.svg",
           rel: "icon",
           type: "image/svg+xml",
-          href: "/favicon.svg",
         },
       ],
     },
   },
+  compatibilityDate: "2026-01-10",
   content: {
+    build: { markdown: { highlight: false } },
     experimental: { sqliteConnector: "native" },
-    build: {
-      markdown: {
-        highlight: {
-          theme: {
-            dark: "github-dark",
-            default: "github-light",
-          },
-        },
-      },
+  },
+  devtools: {
+    enabled: true,
+  },
+  experimental: {
+    componentIslands: {
+      selectiveClient: true,
     },
   },
-  compatibilityDate: "2026-01-10",
-  devtools: { enabled: true },
+  icon: {
+    clientBundle: {
+      scan: true,
+    },
+    componentName: "nuxt-icon",
+    mode: "svg",
+  },
   image: {
     github: {},
     ipx: {},
@@ -34,13 +44,13 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     "@nuxt/fonts",
+    "@nuxt/icon",
     "@nuxt/image",
     "@nuxtjs/color-mode",
     "@nuxtjs/tailwindcss",
-    "@vueuse/nuxt",
     // "nuxt-og-image",
-    "nuxt-phosphor-icons",
-    // "nuxt-security",
+    "@vueuse/nuxt",
+    "motion-v/nuxt",
   ],
   nitro: {
     // This prevents errors like ENOTDIR when navigating ISR routes in development
@@ -49,10 +59,10 @@ export default defineNuxtConfig({
     //     driver: "memory",
     //   },
     // },
-    // prerender: {
-    //   crawlLinks: true,
-    //   routes: ["/"],
-    // },
+    prerender: {
+      crawlLinks: true,
+      routes: ["/"],
+    },
   },
   routeRules: {
     "/api/photos": { isr: 60 * 60 * 24 * 7 }, // 7 days
@@ -63,16 +73,8 @@ export default defineNuxtConfig({
       showcaseCollectionId: "",
     },
   },
-  // security: {
-  //   headers: {
-  //     contentSecurityPolicy: false,
-  //   },
-  // },
   // site: { url: "https://oyedejioyewole.vercel.app" },
   vite: {
-    esbuild: {
-      legalComments: "none",
-    },
     build: {
       terserOptions: {
         format: {
@@ -80,10 +82,17 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-  $development: {
-    routeRules: {
-      "/api/photos": { swr: true },
+    esbuild: {
+      legalComments: "none",
+    },
+    optimizeDeps: {
+      include: [
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "locomotive-scroll",
+        "tailwind-merge",
+        "motion-v",
+      ],
     },
   },
 });

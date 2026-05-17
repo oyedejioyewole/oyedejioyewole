@@ -1,72 +1,55 @@
 <template>
-  <div
-    v-show="pointerType === 'mouse'"
-    ref="cursor-sprite"
-    :class="
-      twMerge([
-        'pointer-events-none fixed grid aspect-square h-20 place-items-center rounded-full border',
-        !(x || y) && 'scale-0',
-        shouldMorph ? 'z-10 border-0 bg-current' : '-z-10 border-dashed',
-      ])
-    "
-  >
-    <PhosphorIcon
-      v-show="shouldMorph"
-      class="fill-primary-300 dark:fill-primary-700 size-7.5"
-      name="arrow-up-right"
-    />
-  </div>
+  <AnimatePresence>
+    <motion.div
+      v-show="!shouldSnap"
+      :initial="{ opacity: 0, scale: 0 }"
+      :animate="{ opacity: 1, scale: 1 }"
+      :exit="{ opacity: 0, scale: 0 }"
+      :class="
+        twMerge([
+          'pointer-events-none fixed grid aspect-square h-20 place-items-center rounded-full border',
+          shouldMorph ? 'z-10 border-0 bg-current' : '-z-10 border-dashed',
+        ])
+      "
+      :style="{
+        x: replicatedX,
+        y: replicatedY,
+        translate: '-50% -50%',
+      }"
+    >
+      <NuxtIcon
+        v-if="shouldMorph"
+        class="z-10 size-7.5 mix-blend-difference"
+        name="ph:arrow-up-right"
+      />
+    </motion.div>
+  </AnimatePresence>
 </template>
 
 <script lang="ts" setup>
-import { createAnimatable } from "animejs/animatable";
+import { animate, motion, useMotionValue } from "motion-v";
 import { twMerge } from "tailwind-merge";
 
-const ANIMATION_DURATION = 300;
-
-const cursorSprite = useTemplateRef("cursor-sprite");
-const cursorSpriteAnimatable = computed(() => {
-  if (!cursorSprite.value) return;
-
-  const animatable = createAnimatable(cursorSprite.value, {
-    x: ANIMATION_DURATION,
-    y: ANIMATION_DURATION,
-    scale: ANIMATION_DURATION,
-    opacity: ANIMATION_DURATION,
-    ease: "out(3)",
-  });
-
-  // Position the element at the viewport center immediately (duration 0)
-  // so animejs tracks this as its starting value. The first mousemove will
-  // then animate from center → cursor, not from (0,0) → cursor.
-  animatable.x?.(window.innerWidth / 2);
-  animatable.y?.(window.innerHeight / 2);
-
-  return animatable;
-});
+const replicatedX = useMotionValue(0);
+const replicatedY = useMotionValue(0);
 
 const shouldMorph = shallowRef(false);
+const shouldSnap = shallowRef(true);
+
 const { x, y, pointerType } = usePointer();
-watch(
-  [x, y, pointerType, cursorSpriteAnimatable],
-  ([newX, newY, newPointerType, newCursorSpriteAnimatable]) => {
-    if (!newCursorSpriteAnimatable || newPointerType !== "mouse") return;
+watch([x, y, pointerType], ([newX, newY, newPointerType]) => {
+  if (newPointerType !== "mouse") return;
 
-    // elementFromPoint uses viewport-relative coordinates
-    const currentElement = document.elementFromPoint(newX, newY);
-    const isMorphTarget = Boolean(
-      currentElement?.closest("[data-morph-cursor]"),
-    );
-    const shouldSnap =
-      !isMorphTarget && Boolean(currentElement?.closest("[data-snap-cursor]"));
+  // elementFromPoint uses viewport-relative coordinates
+  const currentElement = document.elementFromPoint(newX, newY);
 
-    shouldMorph.value = isMorphTarget;
+  const isMorphTarget = Boolean(currentElement?.closest("[data-morph-cursor]"));
+  shouldMorph.value = isMorphTarget;
 
-    newCursorSpriteAnimatable.scale?.(shouldSnap ? 0 : 1);
-    newCursorSpriteAnimatable.opacity?.(shouldSnap ? 0 : 1);
+  shouldSnap.value =
+    !isMorphTarget && Boolean(currentElement?.closest("[data-snap-cursor]"));
 
-    newCursorSpriteAnimatable.x?.(newX - 40);
-    newCursorSpriteAnimatable.y?.(newY - 40);
-  },
-);
+  animate(replicatedX, newX, { type: "tween" });
+  animate(replicatedY, newY, { type: "tween" });
+});
 </script>

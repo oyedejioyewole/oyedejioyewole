@@ -2,28 +2,31 @@
   <!-- Links -->
   <div class="max-xl:col-span-5">
     <!-- Mobile: animated overlay, only mounted when toggled -->
-    <AnimatePresence @exit-complete="pathTransition.exit?.(onNavigationClosed)">
+    <AnimatePresence
+      @exit-complete="$emit('navigation:close', onNavigationClosed)"
+    >
       <nav
         v-show="isNavigationToggled"
         class="group dark:text-primary-700 text-primary-300 fixed top-0 z-20 grid h-dvh w-full"
       >
         <ul class="row-span-2 grid place-items-center">
-          <motion.li
+          <Motion
             v-for="(link, index) in navigationLinks"
             :key="link.name"
+            as="li"
             :initial="{ opacity: 0, y: 40 }"
             :animate="{ opacity: 1, y: 0 }"
             :exit="{ opacity: 0, y: 40 }"
-            :transition="{ duration: 0.3, delay: index * 0.05 }"
+            :transition="{ delay: index * 0.1 }"
           >
             <NuxtLink
               class="inline-flex items-center gap-x-4 font-serif text-4xl"
               :to="link.to"
-              @click="pathTransition.skipTransition = true"
+              @click="skipPageTransition = true"
             >
               {{ link.label }}
             </NuxtLink>
-          </motion.li>
+          </Motion>
         </ul>
 
         <div class="mx-auto space-y-4 self-center">
@@ -34,14 +37,7 @@
             "
           >
             <ColorScheme>
-              <PhosphorIcon
-                :name="{
-                  moon: $colorMode.value === 'light',
-                  sun: $colorMode.value === 'dark',
-                }"
-                class="size-5"
-                weight="duotone"
-              />
+              <NuxtIcon :name="themeIcon" class="size-5" />
 
               <span class="sr-only"
                 >Toggle
@@ -50,13 +46,13 @@
               >
 
               <template #placeholder>
-                <PhosphorIcon class="size-5" name="desktop" weight="duotone" />
+                <NuxtIcon class="size-5" name="ph:desktop-duotone" />
               </template>
             </ColorScheme>
           </UiButton>
 
           <UiButton @click="isNavigationToggled = false"
-            ><PhosphorIcon class="size-5" name="x"
+            ><NuxtIcon class="size-5" name="ph:x"
           /></UiButton>
         </div>
       </nav>
@@ -67,8 +63,8 @@
       <div class="col-[2/12] flex items-center justify-between">
         <AppBranding class="size-10" />
 
-        <UiButton @click="pathTransition.enter?.(onNavigationOpened)">
-          <PhosphorIcon class="size-5" name="list" />
+        <UiButton @click="$emit('navigation:open', onNavigationOpened)">
+          <NuxtIcon class="size-5" name="ph:list" />
         </UiButton>
       </div>
     </nav>
@@ -87,15 +83,14 @@
             class="inline-flex items-center gap-x-2 font-serif"
             :to="link.to"
           >
-            <PhosphorIcon class="size-6" weight="duotone" :name="link.icon" />
+            <NuxtIcon :name="link.icon" />
             {{ link.label }}
           </NuxtLink>
 
-          <PhosphorIcon
+          <NuxtIcon
             v-show="index < navigationLinks.length - 1"
             class="size-10"
-            name="line-vertical"
-            weight="thin"
+            name="ph:line-vertical-thin"
           />
         </li>
       </ul>
@@ -110,14 +105,7 @@
           "
         >
           <ColorScheme>
-            <PhosphorIcon
-              :name="{
-                moon: $colorMode.value === 'light',
-                sun: $colorMode.value === 'dark',
-              }"
-              class="size-5"
-              weight="duotone"
-            />
+            <NuxtIcon :name="themeIcon" class="size-5" />
 
             <span class="sr-only"
               >Toggle
@@ -126,7 +114,7 @@
             >
 
             <template #placeholder>
-              <PhosphorIcon class="size-5" name="desktop" weight="duotone" />
+              <NuxtIcon class="size-5" name="ph:desktop-duotone" />
             </template>
           </ColorScheme>
         </UiButton>
@@ -136,23 +124,35 @@
 </template>
 
 <script lang="ts" setup>
-import { AnimatePresence, motion } from "motion-v";
-import type { PathTransitionExposeT } from "~/layouts/default.vue";
-
 const isNavigationToggled = shallowRef(false);
 
-const pathTransition = inject("path-transition") as PathTransitionExposeT;
+defineEmits<{
+  "navigation:open": [onComplete: () => void];
+  "navigation:close": [onComplete: () => void];
+}>();
 
-const { currentPath, route } = useCurrentPath();
+const skipPageTransition = defineModel<boolean>({ required: true });
+
+const theme = useColorMode();
+const themeIcon = computed(() =>
+  theme.value === "light" ? "ph:moon-duotone" : "ph:sun-duotone",
+);
+
+const { currentPath } = useCurrentPath();
 const navigationLinks = computed(() =>
   [
-    { to: "/", name: "index", label: "Home", icon: "house-simple" },
-    { to: "/photos", name: "photos", label: "Photos", icon: "slideshow" },
+    { to: "/", name: "index", label: "Home", icon: "ph:house-duotone" },
+    {
+      to: "/photos",
+      name: "photos",
+      label: "Photos",
+      icon: "ph:slideshow-duotone",
+    },
     {
       to: "/projects",
       name: "projects",
       label: "Projects",
-      icon: "folder-open",
+      icon: "ph:folder-duotone",
     },
   ].filter((link) => link.to !== currentPath.value),
 );
@@ -163,7 +163,7 @@ nuxtApp.hook("page:loading:end", () => {
 });
 
 function onNavigationClosed() {
-  currentPath.value = route.path;
+  currentPath.value = nuxtApp._route.path;
 }
 
 function onNavigationOpened() {
