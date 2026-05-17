@@ -1,5 +1,5 @@
 <template>
-  <Html data-scroll-container lang="en" />
+  <Html class="scroll-smooth" lang="en" />
 
   <Body
     class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 selection:bg-primary-500/50 cursor-crosshair overflow-x-hidden"
@@ -8,7 +8,7 @@
   <AppEffectsCursorTracking />
   <AppEffectsPathTransition ref="transition" />
 
-  <main class="grid grid-cols-5">
+  <div class="grid grid-cols-5">
     <!-- Left Sidebar -->
     <AppNavigation
       v-model="skipPageTransition"
@@ -28,7 +28,7 @@
       <!-- Footer -->
       <AppFooter v-show="currentPath !== '/'" />
     </main>
-  </main>
+  </div>
 </template>
 
 <script lang="ts" setup>

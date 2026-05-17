@@ -43,7 +43,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/color-mode",
     "@nuxtjs/tailwindcss",
-    // "nuxt-og-image",
     "@vueuse/nuxt",
     "motion-v/nuxt",
   ],
@@ -68,7 +67,7 @@ export default defineNuxtConfig({
       showcaseCollectionId: "",
     },
   },
-  // site: { url: "https://oyedejioyewole.vercel.app" },
+  // site: { defaultLocale: "en", url: "https://oyedejioyewole.vercel.app" },
   vite: {
     build: {
       terserOptions: {
@@ -84,7 +83,6 @@ export default defineNuxtConfig({
       include: [
         "@vue/devtools-core",
         "@vue/devtools-kit",
-        "locomotive-scroll",
         "tailwind-merge",
         "motion-v",
       ],
