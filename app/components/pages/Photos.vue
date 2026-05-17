@@ -39,9 +39,8 @@
             as="button"
             v-for="photo in resolvedMedia.media.slice(startIndex, endIndex)"
             :key="photo!.id"
-            class="rounded-4xl outline-offset-4 outline-current"
             data-morph-cursor
-            :initial="{ opacity: 0, y: 20 }"
+            :initial="{ opacity: 0, y: 40 }"
             :animate="{ opacity: 1, y: 0 }"
             @press="
               navigateTo(photo!.externalUrl, {
@@ -51,19 +50,19 @@
             "
           >
             <NuxtImg
-              class="brightness-90 transition duration-300 hover:brightness-100"
+              class="brightness-70 transition duration-300 hover:brightness-100"
               format="webp"
               placeholder
+              placeholder-class="border border-current/30 aspect-[3/4] bg-current/10"
               width="960"
               :src="photo!.src"
             />
           </Motion>
         </div>
-        <div v-else>
-          <AppBranding
-            class="size-20 opacity-70 transition duration-300 group-hover:opacity-100"
-          />
-        </div>
+        <AppBranding
+          v-else
+          class="size-20 opacity-70 transition duration-300 group-hover:opacity-100"
+        />
       </section>
     </section>
   </section>

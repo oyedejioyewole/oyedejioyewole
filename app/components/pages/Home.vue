@@ -13,6 +13,7 @@
         fetchpriority="high"
         format="webp"
         placeholder
+        placeholder-class="bg-current/10"
         preload
         provider="github"
         height="160px"
