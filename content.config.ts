@@ -9,7 +9,7 @@ export default defineContentConfig({
     }),
     projects: defineCollection({
       type: "data",
-      source: "projects/**.json",
+      source: "projects/**.yml",
       schema: z.object({
         description: z.string(),
         isDraft: z.boolean(),
