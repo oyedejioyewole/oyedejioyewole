@@ -18,7 +18,7 @@
       <!-- Project status badge and external link indicator -->
       <div class="flex w-full items-center justify-between">
         <div
-          class="bg-primary-900/10 dark:bg-primary-100/10 inline-flex w-fit items-center gap-x-2 rounded-full px-3 py-1 font-sans max-2xl:text-sm"
+          class="bg-primary-900/10 dark:bg-primary-100/10 inline-flex w-fit items-center gap-x-2 rounded-full px-3 py-1 max-2xl:text-sm"
         >
           <NuxtIcon size="20" :name="project.icon" />
 
