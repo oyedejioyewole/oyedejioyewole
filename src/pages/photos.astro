@@ -1,0 +1,64 @@
+---
+import CaretLeftIcon from "~icons/ph/caret-left";
+import CaretRightIcon from "~icons/ph/caret-right";
+import CircleNotchIcon from "~icons/ph/circle-notch-thin";
+
+import LayoutBase from "../layouts/Base.astro";
+
+import ContentH1 from "../components/content/H1.astro";
+import ContentParagraph from "../components/content/Paragraph.astro";
+
+import PagesPhotosWrapper from "../components/pages/photos/Wrapper.astro";
+---
+
+<LayoutBase title="My photos">
+    <div class="col-[2/12] space-y-8 xl:col-[2/8]">
+        <div class="flex h-[50vh] items-center">
+            <div
+                class="flex w-full justify-between gap-y-8 max-xl:flex-col xl:items-end"
+            >
+                <div class="space-y-8 xl:max-w-md">
+                    <ContentH1>My photos.</ContentH1>
+
+                    <ContentParagraph
+                        >Most of my work revolves around street and nature
+                        photography.</ContentParagraph
+                    >
+                    <slot />
+                </div>
+
+                <div class="flex items-center gap-x-4" data-snap-cursor>
+                    <button
+                        class="cursor-pointer rounded-full border border-current/30 bg-current/10 px-5 py-3 backdrop-blur-lg transition duration-300 hover:border-current/70 disabled:cursor-not-allowed disabled:opacity-50"
+                        data-action="previous"
+                        disabled
+                    >
+                        <CaretLeftIcon />
+                        <span class="sr-only">Previous page</span>
+                    </button>
+
+                    <button
+                        class="cursor-pointer rounded-full border border-current/30 bg-current/10 px-5 py-3 backdrop-blur-lg transition duration-300 hover:border-current/70 disabled:cursor-not-allowed disabled:opacity-50"
+                        data-action="next"
+                        disabled
+                    >
+                        <CaretRightIcon />
+                        <span class="sr-only">Next page</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <section
+            class="group mb-[16.65vh] grid place-items-center space-y-4 rounded-2xl border border-current/30 bg-current/10 p-8 backdrop-blur-lg transition duration-300 hover:border-current/70"
+            data-snap-cursor
+        >
+            <PagesPhotosWrapper server:defer>
+                <CircleNotchIcon
+                    class="size-20 opacity-70 transition duration-300 group-hover:opacity-100 animate-spin"
+                    slot="fallback"
+                />
+            </PagesPhotosWrapper>
+        </section>
+    </div>
+</LayoutBase>

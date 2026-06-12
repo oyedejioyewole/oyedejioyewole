@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
   :root {
@@ -11,7 +11,7 @@
     );
   }
 
-  .dark {
+  [data-theme="dark"] {
     --spotlight-color: color-mix(
       in srgb,
       var(--color-primary-300),
@@ -33,9 +33,10 @@
   --color-primary-800: oklch(0.311 0.025 61.53);
   --color-primary-900: oklch(0.225 0.018 62.88);
   --color-primary-950: oklch(0.179 0.014 61.53);
+}
 
-  /* Fonts */
-  --font-display: "Croissant One", serif;
-  --font-sans: Poppins, sans-serif;
-  --font-serif: "Playfair Display", serif;
+@theme inline {
+  --font-display: var(--font-croissant-one);
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-playfair-display);
 }
