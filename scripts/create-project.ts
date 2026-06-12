@@ -13,7 +13,7 @@ import { dump as dumpYaml } from "js-yaml";
     return;
   }
 
-  const outputFolder = join(rootDirectory, "content/projects");
+  const outputFolder = join(rootDirectory, "src/data/projects");
 
   if (!existsSync(outputFolder)) {
     mkdirSync(outputFolder, { recursive: true });
