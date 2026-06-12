@@ -1,0 +1,12 @@
+---
+import { getLiveCollection } from "astro:content";
+
+import { shuffleArray } from "../../../utils/array";
+
+import PagesPhotos from "./Index.vue";
+
+const collectionResponse = await getLiveCollection("photos");
+const showcaseContent = shuffleArray(collectionResponse.entries ?? []);
+---
+
+<PagesPhotos client:load data={showcaseContent} />

@@ -1,0 +1,187 @@
+---
+import HouseDuotone from "~icons/ph/house-duotone";
+import SlideshowDuotone from "~icons/ph/slideshow-duotone";
+import FolderOpenDuotone from "~icons/ph/folder-open-duotone";
+import VerticalLineThin from "~icons/ph/line-vertical-thin";
+import List from "~icons/ph/list";
+import X from "~icons/ph/x";
+
+import UiBranding from "../ui/Branding.astro";
+import UiButton from "../ui/Button.astro";
+
+import UiThemeToggle from "../ui/ThemeToggle.astro";
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const navigationLinks = [
+    { to: "/", label: "Home", icon: HouseDuotone },
+    {
+        to: "/photos",
+        label: "Photos",
+        icon: SlideshowDuotone,
+    },
+    {
+        to: "/projects",
+        label: "Projects",
+        icon: FolderOpenDuotone,
+    },
+].filter((link) => link.to !== currentPath);
+---
+
+<!-- Links -->
+<div class="max-xl:col-span-5">
+    <!-- For mobile: invisible by default, slides up after enterSequence() completes -->
+    <nav
+        class="group dark:text-primary-700 text-primary-300 fixed top-0 z-20 grid h-dvh w-full invisible"
+        id="mobile-navigation"
+    >
+        <ul class="row-span-2 grid place-items-center">
+            {
+                navigationLinks.map((link) => (
+                    <li class="translate-10 opacity-0">
+                        <a
+                            class="inline-flex items-center gap-x-4 font-serif text-4xl"
+                            href={link.to}
+                            data-snap-cursor
+                        >
+                            <link.icon class="size-8" />
+                            {link.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <div class="mx-auto space-y-4 self-center">
+            <UiThemeToggle />
+
+            <UiButton data-navigation-toggle="close" transition:persist>
+                <X class="size-5" />
+                <span class="sr-only">Close mobile menu</span>
+            </UiButton>
+        </div>
+    </nav>
+
+    <!-- Mobile header bar -->
+    <nav class="mt-[4dvh] grid grid-cols-12 xl:hidden">
+        <div class="col-[2/12] flex items-center justify-between">
+            <UiBranding class="size-10" />
+
+            <UiButton data-navigation-toggle="open" transition:persist>
+                <List class="size-5" />
+                <span class="sr-only">Open mobile menu</span>
+            </UiButton>
+        </div>
+    </nav>
+
+    <!-- For desktop: at the left of the screen, occupying 1/3 of available width -->
+    <nav
+        id="desktop-navigation"
+        class="sticky top-0 hidden h-screen place-items-center border-r border-current/30 backdrop-blur-md transition-colors hover:border-current/70 xl:grid"
+    >
+        <ul class="flex flex-wrap justify-center gap-y-2">
+            {
+                navigationLinks.map((link, index) => (
+                    <li class="inline-flex items-center">
+                        <a
+                            class="inline-flex items-center gap-x-2 font-serif"
+                            href={link.to}
+                            data-snap-cursor
+                        >
+                            <link.icon class="size-6" />
+                            {link.label}
+                        </a>
+
+                        {index !== navigationLinks.length - 1 && (
+                            <VerticalLineThin class="size-10" />
+                        )}
+                    </li>
+                ))
+            }
+        </ul>
+
+        <UiBranding />
+
+        <UiThemeToggle />
+    </nav>
+</div>
+
+<script>
+    import { animate, stagger } from "motion";
+    import { exitSequence, enterSequence } from "../../utils/path-transition";
+    import { navigate } from "astro:transitions/client";
+
+    let directNavigationRequested = false;
+
+    async function openNavigation() {
+        const mobileNavigation = document.querySelector(
+            "nav#mobile-navigation",
+        )!;
+        mobileNavigation.classList.remove("invisible");
+
+        animate(
+            mobileNavigation.querySelectorAll("ul > li"),
+            { opacity: [0, 1], y: [40, 0] },
+            { delay: stagger(0.1) },
+        );
+    }
+
+    async function closeNavigation() {
+        const mobileNavigation = document.querySelector(
+            "nav#mobile-navigation",
+        )!;
+
+        await animate(
+            mobileNavigation.querySelectorAll("ul > li"),
+            { opacity: [1, 0], y: [0, 40] },
+            { delay: stagger(0.1) },
+        );
+
+        mobileNavigation.classList.add("invisible");
+
+        if (!directNavigationRequested) await exitSequence();
+    }
+
+    const openNavigationElement = document.querySelector<HTMLButtonElement>(
+        "button[data-navigation-toggle=open]",
+    )!;
+    openNavigationElement.addEventListener("click", () =>
+        enterSequence(openNavigation),
+    );
+
+    const closeNavigationElement = document.querySelector<HTMLButtonElement>(
+        "button[data-navigation-toggle=close]",
+    )!;
+    closeNavigationElement.addEventListener("click", closeNavigation);
+
+    // Handle Astro's client-side navigation events to trigger the path transition
+    document.addEventListener("astro:before-preparation", (event) => {
+        if (directNavigationRequested) return;
+
+        const originalLoader = event.loader;
+        event.loader = async () => enterSequence(originalLoader);
+    });
+
+    // After the new page has been swapped in, run the exit sequence to hide the path transition
+    document.addEventListener("astro:after-swap", () => {
+        exitSequence();
+
+        directNavigationRequested = false;
+    });
+
+    // Handle direct clicks on navigation links in the mobile menu
+    document.addEventListener("astro:page-load", () => {
+        document
+            .querySelectorAll("nav#mobile-navigation ul > li > a")
+            .forEach((link) => {
+                link.addEventListener("click", async (event) => {
+                    event.preventDefault();
+
+                    directNavigationRequested = true;
+                    await closeNavigation();
+
+                    await navigate((event.target as HTMLAnchorElement).href);
+                });
+            });
+    });
+</script>

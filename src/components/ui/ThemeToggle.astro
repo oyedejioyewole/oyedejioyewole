@@ -1,0 +1,49 @@
+---
+import DesktopDuotone from "~icons/ph/desktop-duotone";
+
+import UiButton from "./Button.astro";
+---
+
+<UiButton data-theme-toggle transition:persist>
+  <DesktopDuotone class="size-5" />
+
+  <span class="sr-only">Using fallback theme</span>
+</UiButton>
+
+<script>
+  import SunDuotone from "~icons/ph/sun-duotone?raw&width=20px&height=20px";
+  import MoonDuotone from "~icons/ph/moon-duotone?raw&width=20px&height=20px";
+
+  let currentTheme =
+    document.documentElement.attributes.getNamedItem("data-theme")?.value;
+
+  const themeToggles = document.querySelectorAll<HTMLButtonElement>(
+    "button[data-theme-toggle]",
+  );
+
+  function updateThemeIcons() {
+    themeToggles.forEach((themeToggle) => {
+      const themeIcon = themeToggle.querySelector("svg")!;
+
+      themeIcon.outerHTML = (currentTheme === "dark"
+        ? SunDuotone
+        : MoonDuotone) as unknown as string;
+
+      themeToggle.querySelector("span.sr-only")!.textContent = `Toggle ${
+        currentTheme === "dark" ? "light" : "dark"
+      } mode`;
+    });
+  }
+
+  themeToggles.forEach((themeToggle) => {
+    themeToggle.addEventListener("click", () => {
+      currentTheme = currentTheme === "dark" ? "light" : "dark";
+      document.dispatchEvent(
+        new CustomEvent("set-theme", { detail: currentTheme }),
+      ); // or pass `null` to clear the saved setting
+      updateThemeIcons();
+    });
+  });
+
+  updateThemeIcons();
+</script>

@@ -1,0 +1,56 @@
+---
+import ArrowUpRightIcon from "~icons/ph/arrow-up-right";
+---
+
+<div
+  class="pointer-events-none fixed grid aspect-square h-20 place-items-center border rounded-full invisible -z-10"
+  id="cursor-tracker"
+  transition:persist
+>
+  <ArrowUpRightIcon
+    class="size-7.5 mix-blend-difference fill-current invisible"
+  />
+</div>
+
+<script>
+  import { animate } from "motion";
+
+  const cursorElement =
+    document.querySelector<HTMLDivElement>("div#cursor-tracker")!;
+
+  document.addEventListener(
+    "pointermove",
+    ({ pointerType, clientX, clientY }) => {
+      if (pointerType !== "mouse") return;
+
+      cursorElement.classList.remove("invisible");
+
+      // elementFromPoint uses viewport-relative coordinates
+      const currentElement = document.elementFromPoint(clientX, clientY);
+
+      const isMorphTarget = Boolean(
+        currentElement?.closest("[data-morph-cursor]"),
+      );
+
+      if (isMorphTarget) {
+        cursorElement.querySelector("svg")!.classList.remove("invisible");
+        document.body.style.cursor = "none";
+      } else {
+        cursorElement.querySelector("svg")!.classList.add("invisible");
+        document.body.style.cursor = "crosshair";
+      }
+
+      const isSnapTarget =
+        !isMorphTarget &&
+        Boolean(currentElement?.closest("[data-snap-cursor]"));
+
+      animate(cursorElement, {
+        backgroundColor: isMorphTarget ? "currentColor" : "transparent",
+        scale: isSnapTarget ? 0.5 : 1,
+        x: clientX - 40,
+        y: clientY - 40,
+        zIndex: isMorphTarget ? 10 : -10,
+      });
+    },
+  );
+</script>
