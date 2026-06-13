@@ -1,42 +1,43 @@
 {
-  "name": "site",
-  "private": true,
+  "name": "my-portfolio",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "build": "nuxt build",
-    "cleanup": "nuxt cleanup",
-    "dev": "nuxt dev",
-    "preview": "PORT=3001 nuxt preview",
-    "projects:new": "bun scripts/create-project.ts",
-    "postinstall": "nuxt prepare"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "projects:new": "node scripts/create-project.ts"
   },
   "dependencies": {
-    "@nuxt/content": "3.13.0",
-    "@nuxt/fonts": "0.14.0",
-    "@nuxt/image": "2.0.0",
-    "@nuxtjs/color-mode": "^4.0.0",
-    "@nuxtjs/tailwindcss": "7.0.0-beta.1",
-    "@upstash/redis": "^1.37.0",
-    "animejs": "^4.4.0",
-    "locomotive-scroll": "5.0.1",
-    "motion-v": "^2.2.1",
-    "nuxt": "^4.4.2",
-    "nuxt-og-image": "6.4.8",
-    "nuxt-phosphor-icons": "^2.3.3",
-    "nuxt-security": "2.5.1",
-    "pexels": "^1.4.0",
-    "tailwind-merge": "^3.5.0",
-    "vue": "^3.5.33",
-    "vue-router": "^5.0.6"
+    "@astrojs/netlify": "^7.0.13",
+    "@astrojs/vue": "^6.0.1",
+    "@fontsource/croissant-one": "^5.2.7",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/poppins": "^5.2.7",
+    "@tailwindcss/vite": "^4.3.0",
+    "@vueuse/core": "^14.3.0",
+    "astro": "^6.4.4",
+    "astro-remote": "^0.3.4",
+    "motion": "^12.40.0",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.0",
+    "vue": "^3.5.35"
   },
   "devDependencies": {
-    "@inquirer/prompts": "^8.4.2",
-    "@vueuse/core": "^14.2.1",
-    "@vueuse/nuxt": "^14.2.1",
+    "@iconify-json/devicon": "^1.2.62",
+    "@iconify-json/ph": "^1.2.2",
+    "@inquirer/prompts": "^8.5.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^25.9.2",
+    "astro-themes": "^0.2.7",
     "consola": "^3.4.2",
-    "nanoid": "^5.1.9",
+    "js-yaml": "^4.2.0",
+    "netlify-cli": "^26.1.0",
     "package-directory": "^8.2.0",
-    "prettier": "^3.8.3",
-    "prettier-plugin-tailwindcss": "^0.8.0"
+    "pexels": "^1.4.0",
+    "unplugin-icons": "^23.0.1"
   }
 }

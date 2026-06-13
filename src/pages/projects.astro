@@ -1,0 +1,84 @@
+---
+import { twMerge } from "tailwind-merge";
+import { getCollection } from "astro:content";
+
+import ArrowRight from "~icons/ph/arrow-right";
+
+import PythonIcon from "~icons/devicon/python";
+import TailwindCSSIcon from "~icons/devicon/tailwindcss";
+import TypescriptIcon from "~icons/devicon/typescript";
+import VuejsIcon from "~icons/devicon/vuejs";
+import NuxtjsIcon from "~icons/devicon/nuxt";
+import TauriIcon from "~icons/devicon/tauri";
+
+import LayoutBase from "../layouts/Base.astro";
+
+import { socialLinks } from "../components/app/Footer.astro";
+
+import PagesProjectsGrid from "../components/pages/projects/Grid.astro";
+import PagesProjectsLanguages from "../components/pages/projects/Languages.astro";
+import PagesProjectsStatistics from "../components/pages/projects/Statistics.astro";
+
+import ContentH1 from "../components/content/H1.astro";
+import ContentParagraph from "../components/content/Paragraph.astro";
+
+const allProjects = await getCollection("projects");
+---
+
+<LayoutBase title="My projects">
+    <div class="col-[2/12] space-y-8 xl:col-[2/8]">
+        <div class="flex min-h-[50vh] items-center">
+            <div
+                class="flex w-full flex-wrap items-end justify-between gap-y-8"
+            >
+                <div class="space-y-8 md:max-w-sm lg:max-w-md">
+                    <ContentH1>My projects.</ContentH1>
+
+                    <ContentParagraph>
+                        These are some of the languages/frameworks I use in my
+                        projects.
+                    </ContentParagraph>
+
+                    <PagesProjectsLanguages
+                        entries={[
+                            PythonIcon,
+                            TailwindCSSIcon,
+                            TypescriptIcon,
+                            VuejsIcon,
+                            NuxtjsIcon,
+                            TauriIcon,
+                        ]}
+                    />
+                </div>
+
+                <a
+                    class="group hover:text-primary-300 dark:hover:text-primary-700 dark:before:bg-primary-300 before:bg-primary-700 relative isolate flex size-fit h-15 w-40 cursor-pointer items-center justify-around overflow-hidden rounded-full bg-current/10 px-5 duration-300 before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:rounded-full before:transition before:duration-300 hover:before:scale-x-100 backdrop-blur-sm"
+                    data-snap-cursor
+                    target="_blank"
+                    href={socialLinks[0].url}
+                >
+                    View all <ArrowRight
+                        class="size-5 transition duration-300 group-hover:-rotate-45"
+                    />
+                </a>
+            </div>
+        </div>
+
+        <PagesProjectsGrid data={allProjects} server:defer>
+            <ul class="grid gap-4 lg:grid-cols-3" slot="fallback">
+                {
+                    Array.from({ length: 6 }).map((_, index) => (
+                        <li
+                            class={twMerge(
+                                "group flex h-56 animate-pulse flex-col items-start gap-y-4 rounded-2xl border border-current/30 bg-current/10 backdrop-blur-sm transition-all duration-300 hover:border-current/70",
+                                [0, 3, 4].includes(index) && "lg:col-span-2",
+                            )}
+                        />
+                    ))
+                }
+            </ul>
+        </PagesProjectsGrid>
+
+        <PagesProjectsStatistics data={allProjects} />
+    </div>
+</LayoutBase>

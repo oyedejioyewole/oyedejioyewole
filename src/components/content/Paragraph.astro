@@ -1,0 +1,19 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    class?: string;
+    hasAccent?: boolean;
+}
+const { hasAccent = false } = Astro.props;
+---
+
+<p
+    class={twMerge(
+        "text-primary-900 dark:text-primary-100 leading-relaxed",
+        hasAccent && "text-current",
+        Astro.props.class as string | undefined,
+    )}
+>
+    <slot />
+</p>

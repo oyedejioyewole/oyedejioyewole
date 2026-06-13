@@ -1,0 +1,75 @@
+---
+import Paragraph from "../content/Paragraph.astro";
+import UiPexelsLogo from "../ui/PexelsLogo.astro";
+
+import GithubLogoDuotone from "~icons/ph/github-logo-duotone";
+import InstagramLogoDuotone from "~icons/ph/instagram-logo-duotone";
+import Mailbox from "~icons/ph/mailbox";
+
+export const socialLinks = [
+  {
+    label: "Go to my GitHub",
+    icon: GithubLogoDuotone,
+    url: "https://github.com/oyedejioyewole",
+  },
+  {
+    label: "Go to my Instagram",
+    icon: InstagramLogoDuotone,
+    url: "https://instagram.com/oyedeji.oyewole",
+  },
+  {
+    label: "Go to my Pexels",
+    icon: "pexels-logo",
+    url: "https://www.pexels.com/@oyedeji-oyewole-2149239433",
+  },
+];
+---
+
+<footer
+  class="flex flex-wrap items-center justify-around gap-y-8 border-t border-current/30 p-8 backdrop-blur-md transition duration-300 hover:border-current/70"
+>
+  <div class="space-y-2 max-md:text-center">
+    Made with ♥️ while using 🎧
+
+    <Paragraph class="font-bold" hasAccent>
+      &copy; 2024 - {new Date().getFullYear()} Oyedeji Oyewole.
+    </Paragraph>
+  </div>
+
+  <div class="grid place-items-center gap-y-4">
+    <ul class="flex gap-x-4">
+      {
+        socialLinks.map((social) => (
+          <li>
+            <a
+              class="inline-block rounded-full px-3 outline-offset-8 hover:outline"
+              data-snap-cursor
+              target="_blank"
+              href={social.url}
+            >
+              <span class="sr-only">{social.label}</span>
+
+              {social.icon === "pexels-logo" ? (
+                <UiPexelsLogo class="size-5 fill-current/20" />
+              ) : (
+                <social.icon class="size-5" />
+              )}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="font-serif font-bold italic">or</p>
+
+    <a
+      class="group hover:text-primary-300 dark:hover:text-primary-700 dark:before:bg-primary-300 before:bg-primary-700 relative isolate flex cursor-pointer items-center gap-x-4 overflow-hidden rounded-full bg-current/10 px-5 py-3 duration-300 before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:rounded-full before:transition before:duration-300 hover:before:scale-x-100"
+      data-snap-cursor
+      target="_blank"
+      href="mailto://oyedejioyewole.q4e75@passinbox.com"
+    >
+      Drop a message
+      <Mailbox class="size-5 transition duration-300" />
+    </a>
+  </div>
+</footer>

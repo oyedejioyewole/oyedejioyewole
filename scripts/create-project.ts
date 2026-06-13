@@ -1,8 +1,9 @@
 import { confirm, input } from "@inquirer/prompts";
 import { consola } from "consola";
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { packageDirectory } from "package-directory";
-import { join } from "path";
+import { join } from "node:path";
+import { dump as dumpYaml } from "js-yaml";
 
 (async () => {
   const rootDirectory = await packageDirectory();
@@ -12,7 +13,7 @@ import { join } from "path";
     return;
   }
 
-  const outputFolder = join(rootDirectory, "content/projects");
+  const outputFolder = join(rootDirectory, "src/data/projects");
 
   if (!existsSync(outputFolder)) {
     mkdirSync(outputFolder, { recursive: true });
@@ -45,9 +46,10 @@ import { join } from "path";
       url: projectUrl || undefined,
     };
 
-    const filepath = join(outputFolder, `${projectName}.json`);
+    // const filepath = join(outputFolder, `${projectName}.json`);
+    const filepath = join(outputFolder, `${projectName}.yml`);
 
-    writeFileSync(filepath, JSON.stringify(projectData, null, 2));
+    writeFileSync(filepath, dumpYaml(projectData));
 
     console.log();
     consola.success(`Project '${projectName}' created at ${filepath}`);
