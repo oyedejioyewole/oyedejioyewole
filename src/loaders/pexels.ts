@@ -70,7 +70,7 @@ export function createPexelsLoader(config: {
 
             const { attributes, src } = await getImage({
               inferSize: true,
-              src: item.src.large,
+              src: item.src.large2x,
             });
 
             return {
