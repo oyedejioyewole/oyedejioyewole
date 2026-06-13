@@ -1,12 +1,12 @@
 // @ts-check
-import { defineConfig, fontProviders, envField } from "astro/config";
+import { defineConfig, envField, fontProviders } from "astro/config";
 
 import vue from "@astrojs/vue";
 import tailwindcss from "@tailwindcss/vite";
 
 import Icons from "unplugin-icons/vite";
 
-import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
@@ -40,7 +40,7 @@ export default defineConfig({
   ],
 
   image: {
-    domains: ["avatars.githubusercontent.com"],
+    domains: ["avatars.githubusercontent.com", "images.pexels.com"],
   },
 
   integrations: [vue()],
@@ -49,5 +49,5 @@ export default defineConfig({
     plugins: [tailwindcss(), Icons({ compiler: "astro" })],
   },
 
-  adapter: cloudflare(),
+  adapter: vercel({ imageService: true }),
 });
