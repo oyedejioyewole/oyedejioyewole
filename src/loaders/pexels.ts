@@ -1,9 +1,12 @@
-import type { Medium, ErrorResponse } from "pexels";
+import { getImage } from "astro:assets";
+
+import type { GetImageResult } from "astro";
 import type { LiveLoader } from "astro/loaders";
+import type { ErrorResponse, Medium } from "pexels";
 
 export interface Response {
   externalUrl: string;
-  src: string;
+  image: Pick<GetImageResult, "attributes" | "src">;
 }
 
 type MediaResponse =
@@ -61,26 +64,31 @@ export function createPexelsLoader(config: {
           config.showcaseCollectionId,
         );
 
-        return {
-          entries: mediaResponse
-            .map((item) => {
-              if (!("src" in item)) return null;
+        const resolvedEntries = await Promise.all(
+          mediaResponse.map(async (item) => {
+            if (!("src" in item)) return null;
 
-              return {
-                id: `${item.id}`,
-                data: {
-                  externalUrl: item.url,
-                  src: item.src.large2x,
-                },
-              };
-            })
-            .filter((entry): entry is NonNullable<typeof entry> =>
-              Boolean(entry),
-            ),
+            const { attributes, src } = await getImage({
+              inferSize: true,
+              src: item.src.large,
+            });
+
+            return {
+              id: `${item.id}`,
+              data: {
+                externalUrl: item.url,
+                image: { attributes, src },
+              },
+            };
+          }),
+        );
+
+        return {
+          entries: resolvedEntries.filter(
+            (entry): entry is NonNullable<typeof entry> => Boolean(entry),
+          ),
         };
       } catch (error) {
-        console.error(error);
-
         return {
           error: new Error("Failed to load Pexels showcase", {
             cause: error,

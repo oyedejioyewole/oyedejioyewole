@@ -8,12 +8,13 @@
         >
             <a target="_blank" :href="photo.data.externalUrl">
                 <img
+                    v-bind="photo.data.image.attributes"
                     :ref="onImageRef"
                     class="brightness-70 transition duration-300 hover:brightness-100 bg-current/10 hover:cursor-none [&:not([data-loaded])]:aspect-3/4 rounded-2xl"
                     data-morph-cursor
                     width="940"
                     :alt="`Pexels ID: ${photo.id}`"
-                    :src="photo.data.src"
+                    :src="photo.data.image.src"
                     @load="onImageLoad"
                 />
             </a>
@@ -65,11 +66,8 @@ onMounted(() => {
         previousControlButtonRef.disabled = false;
         nextControlButtonRef.disabled = false;
 
-        if (isFirstPage.value) {
-            previousControlButtonRef.disabled = true;
-        } else if (isLastPage.value) {
-            nextControlButtonRef.disabled = true;
-        }
+        if (isFirstPage.value) previousControlButtonRef.disabled = true;
+        else if (isLastPage.value) nextControlButtonRef.disabled = true;
     });
 
     useEventListener(previousControlButtonRef, "click", prev);
