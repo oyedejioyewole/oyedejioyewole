@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 import Icons from "unplugin-icons/vite";
 
-import vercel from "@astrojs/vercel";
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
@@ -49,5 +49,5 @@ export default defineConfig({
     plugins: [tailwindcss(), Icons({ compiler: "astro" })],
   },
 
-  adapter: vercel({ imageService: true }),
+  adapter: netlify(),
 });

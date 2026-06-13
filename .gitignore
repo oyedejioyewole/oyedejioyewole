@@ -26,8 +26,5 @@ pnpm-debug.log*
 # unlighthouse reports
 .unlighthouse/
 
-# vercel
-.vercel/
-
-# environment variables
-.env.*
+# local Netlify folder
+.netlify/

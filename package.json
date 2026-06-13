@@ -12,7 +12,7 @@
     "projects:new": "node scripts/create-project.ts"
   },
   "dependencies": {
-    "@astrojs/vercel": "^10.0.8",
+    "@astrojs/netlify": "^7.0.13",
     "@astrojs/vue": "^6.0.1",
     "@fontsource/croissant-one": "^5.2.7",
     "@fontsource/playfair-display": "^5.2.8",
@@ -35,6 +35,7 @@
     "astro-themes": "^0.2.7",
     "consola": "^3.4.2",
     "js-yaml": "^4.2.0",
+    "netlify-cli": "^26.1.0",
     "package-directory": "^8.2.0",
     "pexels": "^1.4.0",
     "unplugin-icons": "^23.0.1"
