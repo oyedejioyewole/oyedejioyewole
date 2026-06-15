@@ -87,6 +87,9 @@ export function createPexelsLoader(config: {
           entries: resolvedEntries.filter(
             (entry): entry is NonNullable<typeof entry> => Boolean(entry),
           ),
+          cacheHint: {
+            tags: ["showcase"],
+          },
         };
       } catch (error) {
         return {
