@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "netlify serve",
     "astro": "astro",
     "projects:new": "node scripts/create-project.ts"
   },
@@ -17,6 +17,7 @@
     "@fontsource/croissant-one": "^5.2.7",
     "@fontsource/playfair-display": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
+    "@netlify/cache": "^3.4.8",
     "@tailwindcss/vite": "^4.3.0",
     "@vueuse/core": "^14.3.0",
     "astro": "^6.4.4",
