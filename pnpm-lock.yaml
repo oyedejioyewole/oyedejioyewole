@@ -23,9 +23,15 @@ importers:
       '@fontsource/poppins':
         specifier: ^5.2.7
         version: 5.2.7
+      '@netlify/blobs':
+        specifier: ^10.7.9
+        version: 10.7.9(supports-color@10.2.2)
       '@netlify/cache':
         specifier: ^3.4.8
         version: 3.4.8
+      '@netlify/functions':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.0(vite@7.3.5(@types/node@25.9.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
@@ -77,7 +83,7 @@ importers:
         version: 4.2.0
       netlify-cli:
         specifier: ^26.1.0
-        version: 26.1.0(@types/node@25.9.2)(picomatch@4.0.4)(rollup@4.61.1)
+        version: 26.1.0(@types/node@25.9.2)(picomatch@4.0.4)(rollup@4.61.1)(supports-color@10.2.2)
       package-directory:
         specifier: ^8.2.0
         version: 8.2.0
@@ -7080,7 +7086,7 @@ snapshots:
       semver: 7.8.2
       tmp-promise: 3.0.3
 
-  '@netlify/dev@4.18.7(rollup@4.61.1)':
+  '@netlify/dev@4.18.7(rollup@4.61.1)(supports-color@10.2.2)':
     dependencies:
       '@netlify/ai': 0.4.1
       '@netlify/blobs': 10.7.9(supports-color@10.2.2)
@@ -7088,7 +7094,7 @@ snapshots:
       '@netlify/database-dev': 0.10.1
       '@netlify/dev-utils': 4.4.6
       '@netlify/edge-functions-dev': 1.0.20
-      '@netlify/functions-dev': 1.3.0(rollup@4.61.1)
+      '@netlify/functions-dev': 1.3.0(rollup@4.61.1)(supports-color@10.2.2)
       '@netlify/headers': 2.1.11
       '@netlify/images': 1.3.10(@netlify/blobs@10.7.9)
       '@netlify/redirects': 3.1.13
@@ -7162,7 +7168,7 @@ snapshots:
     dependencies:
       '@netlify/types': 2.8.0
 
-  '@netlify/functions-dev@1.3.0(rollup@4.61.1)':
+  '@netlify/functions-dev@1.3.0(rollup@4.61.1)(supports-color@10.2.2)':
     dependencies:
       '@netlify/blobs': 10.7.9(supports-color@10.2.2)
       '@netlify/dev-utils': 4.4.6
@@ -7170,7 +7176,7 @@ snapshots:
       '@netlify/zip-it-and-ship-it': 14.7.1(rollup@4.61.1)(supports-color@10.2.2)
       cron-parser: 4.9.0
       decache: 4.6.2
-      extract-zip: 2.0.1
+      extract-zip: 2.0.1(supports-color@10.2.2)
       is-stream: 4.0.1
       jwt-decode: 4.0.0
       lambda-local: 2.2.0
@@ -7357,7 +7363,7 @@ snapshots:
 
   '@netlify/vite-plugin@2.12.7(rollup@4.61.1)(vite@7.3.5(@types/node@25.9.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))':
     dependencies:
-      '@netlify/dev': 4.18.7(rollup@4.61.1)
+      '@netlify/dev': 4.18.7(rollup@4.61.1)(supports-color@10.2.2)
       '@netlify/dev-utils': 4.4.6
       dedent: 1.7.2
       vite: 7.3.5(@types/node@25.9.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
@@ -7635,7 +7641,7 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@pnpm/tabtab@0.5.4':
+  '@pnpm/tabtab@0.5.4(supports-color@10.2.2)':
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       enquirer: 2.4.1
@@ -8516,7 +8522,7 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 3.6.2
 
-  body-parser@2.2.2:
+  body-parser@2.2.2(supports-color@10.2.2):
     dependencies:
       bytes: 3.1.2
       content-type: 1.0.5
@@ -9295,10 +9301,10 @@ snapshots:
     dependencies:
       on-headers: 1.1.0
 
-  express@5.2.1:
+  express@5.2.1(supports-color@10.2.2):
     dependencies:
       accepts: 2.0.0
-      body-parser: 2.2.2
+      body-parser: 2.2.2(supports-color@10.2.2)
       content-disposition: 1.1.0
       content-type: 1.0.5
       cookie: 0.7.2
@@ -9308,7 +9314,7 @@ snapshots:
       encodeurl: 2.0.0
       escape-html: 1.0.3
       etag: 1.8.1
-      finalhandler: 2.1.1
+      finalhandler: 2.1.1(supports-color@10.2.2)
       fresh: 2.0.0
       http-errors: 2.0.1
       merge-descriptors: 2.0.0
@@ -9319,8 +9325,8 @@ snapshots:
       proxy-addr: 2.0.7
       qs: 6.15.2
       range-parser: 1.2.1
-      router: 2.2.0
-      send: 1.2.1
+      router: 2.2.0(supports-color@10.2.2)
+      send: 1.2.1(supports-color@10.2.2)
       serve-static: 2.2.1
       statuses: 2.0.2
       type-is: 2.1.0
@@ -9332,7 +9338,7 @@ snapshots:
 
   extend@3.0.2: {}
 
-  extract-zip@2.0.1:
+  extract-zip@2.0.1(supports-color@10.2.2):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       get-stream: 5.2.0
@@ -9444,7 +9450,7 @@ snapshots:
 
   filter-obj@6.1.0: {}
 
-  finalhandler@2.1.1:
+  finalhandler@2.1.1(supports-color@10.2.2):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       encodeurl: 2.0.0
@@ -9482,7 +9488,7 @@ snapshots:
     dependencies:
       from2: 2.3.0
 
-  follow-redirects@1.16.0(debug@4.4.3):
+  follow-redirects@1.16.0(debug@4.4.3(supports-color@10.2.2)):
     optionalDependencies:
       debug: 4.4.3(supports-color@10.2.2)
 
@@ -9821,21 +9827,21 @@ snapshots:
       statuses: 2.0.2
       toidentifier: 1.0.1
 
-  http-proxy-middleware@3.0.6:
+  http-proxy-middleware@3.0.6(supports-color@10.2.2):
     dependencies:
       '@types/http-proxy': 1.17.17
       debug: 4.4.3(supports-color@10.2.2)
-      http-proxy: 1.18.1(debug@4.4.3)
+      http-proxy: 1.18.1(debug@4.4.3(supports-color@10.2.2))
       is-glob: 4.0.3
       is-plain-object: 5.0.0
       micromatch: 4.0.8
     transitivePeerDependencies:
       - supports-color
 
-  http-proxy@1.18.1(debug@4.4.3):
+  http-proxy@1.18.1(debug@4.4.3(supports-color@10.2.2)):
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.16.0(debug@4.4.3)
+      follow-redirects: 1.16.0(debug@4.4.3(supports-color@10.2.2))
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -9849,7 +9855,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  https-proxy-agent@8.0.0:
+  https-proxy-agent@8.0.0(supports-color@10.2.2):
     dependencies:
       agent-base: 8.0.0
       debug: 4.4.3(supports-color@10.2.2)
@@ -10873,7 +10879,7 @@ snapshots:
 
   neotraverse@0.6.18: {}
 
-  netlify-cli@26.1.0(@types/node@25.9.2)(picomatch@4.0.4)(rollup@4.61.1):
+  netlify-cli@26.1.0(@types/node@25.9.2)(picomatch@4.0.4)(rollup@4.61.1)(supports-color@10.2.2):
     dependencies:
       '@fastify/static': 9.1.3
       '@netlify/ai': 0.4.1
@@ -10882,7 +10888,7 @@ snapshots:
       '@netlify/build': 35.15.0(@opentelemetry/api@1.9.0)(@types/node@25.9.2)(picomatch@4.0.4)(rollup@4.61.1)
       '@netlify/build-info': 10.5.1
       '@netlify/config': 24.6.0
-      '@netlify/dev': 4.18.7(rollup@4.61.1)
+      '@netlify/dev': 4.18.7(rollup@4.61.1)(supports-color@10.2.2)
       '@netlify/dev-utils': 4.4.6
       '@netlify/edge-bundler': 14.10.3
       '@netlify/edge-functions': 3.0.8
@@ -10894,7 +10900,7 @@ snapshots:
       '@netlify/zip-it-and-ship-it': 14.7.1(rollup@4.61.1)(supports-color@10.2.2)
       '@octokit/rest': 22.0.1
       '@opentelemetry/api': 1.9.0
-      '@pnpm/tabtab': 0.5.4
+      '@pnpm/tabtab': 0.5.4(supports-color@10.2.2)
       ansi-escapes: 7.3.0
       ansi-to-html: 0.7.2
       ascii-table: 0.0.9
@@ -10917,7 +10923,7 @@ snapshots:
       envinfo: 7.21.0
       etag: 1.8.1
       execa: 5.1.1
-      express: 5.2.1
+      express: 5.2.1(supports-color@10.2.2)
       express-logging: 1.1.1
       fastest-levenshtein: 1.0.16
       fastify: 5.8.5
@@ -10927,9 +10933,9 @@ snapshots:
       get-port: 5.1.1
       git-repo-info: 2.1.1
       gitconfiglocal: 2.1.0
-      http-proxy: 1.18.1(debug@4.4.3)
-      http-proxy-middleware: 3.0.6
-      https-proxy-agent: 8.0.0
+      http-proxy: 1.18.1(debug@4.4.3(supports-color@10.2.2))
+      http-proxy-middleware: 3.0.6(supports-color@10.2.2)
+      https-proxy-agent: 8.0.0(supports-color@10.2.2)
       inquirer: 8.2.7(@types/node@25.9.2)
       inquirer-autocomplete-prompt: 1.4.0(inquirer@8.2.7(@types/node@25.9.2))
       is-docker: 4.0.0
@@ -11806,7 +11812,7 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.61.1
       fsevents: 2.3.3
 
-  router@2.2.0:
+  router@2.2.0(supports-color@10.2.2):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       depd: 2.0.0
@@ -11873,7 +11879,7 @@ snapshots:
 
   semver@7.8.2: {}
 
-  send@1.2.1:
+  send@1.2.1(supports-color@10.2.2):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       encodeurl: 2.0.0
@@ -11894,7 +11900,7 @@ snapshots:
       encodeurl: 2.0.0
       escape-html: 1.0.3
       parseurl: 1.3.3
-      send: 1.2.1
+      send: 1.2.1(supports-color@10.2.2)
     transitivePeerDependencies:
       - supports-color
 
