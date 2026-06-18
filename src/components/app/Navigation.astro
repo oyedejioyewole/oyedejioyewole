@@ -52,7 +52,7 @@ const navigationLinks = [
             }
         </ul>
 
-        <div class="mx-auto space-y-4 self-center">
+        <div class="mx-auto space-y-4 self-center translate-y-10 opacity-0">
             <UiThemeToggle />
 
             <UiButton data-navigation-toggle="close" transition:persist>
@@ -107,9 +107,9 @@ const navigationLinks = [
 </div>
 
 <script>
-    import { animate, stagger } from "motion";
-    import { exitSequence, enterSequence } from "../../utils/path-transition";
     import { navigate } from "astro:transitions/client";
+    import { animate, stagger } from "motion";
+    import { enterSequence, exitSequence } from "../../utils/path-transition";
 
     let directNavigationRequested = false;
 
@@ -120,7 +120,7 @@ const navigationLinks = [
         mobileNavigation.classList.remove("invisible");
 
         animate(
-            mobileNavigation.querySelectorAll("ul > li"),
+            mobileNavigation.querySelectorAll("ul > li, div"),
             { opacity: [0, 1], y: [40, 0] },
             { delay: stagger(0.1) },
         );
@@ -131,15 +131,17 @@ const navigationLinks = [
             "nav#mobile-navigation",
         )!;
 
-        await animate(
-            mobileNavigation.querySelectorAll("ul > li"),
+        animate(
+            mobileNavigation.querySelectorAll("ul > li, div"),
             { opacity: [1, 0], y: [0, 40] },
-            { delay: stagger(0.1) },
+            {
+                delay: stagger(0.1),
+                onComplete: () => {
+                    mobileNavigation.classList.add("invisible");
+                    if (!directNavigationRequested) exitSequence();
+                },
+            },
         );
-
-        mobileNavigation.classList.add("invisible");
-
-        if (!directNavigationRequested) await exitSequence();
     }
 
     const openNavigationElement = document.querySelector<HTMLButtonElement>(

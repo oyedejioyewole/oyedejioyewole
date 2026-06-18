@@ -12,10 +12,13 @@ export async function exitSequence() {
       pathOffset: [0, 1],
       ...(window.innerWidth >= 1280 && { strokeWidth: [250, 2] }),
     },
-    { duration: 1 },
+    {
+      duration: 1,
+      onComplete: () => {
+        pathTransition.classList.add("invisible");
+      },
+    },
   );
-
-  pathTransition.classList.add("invisible");
 }
 
 export async function enterSequence(onComplete?: () => Promise<void>) {
