@@ -1,12 +1,31 @@
 ---
+import { YEAR, cacheHeaders } from "@netlify/cache";
 import { getLiveCollection } from "astro:content";
-
-import { shuffleArray } from "../../../utils/array";
 
 import PagesPhotos from "./Index.vue";
 
-const collectionResponse = await getLiveCollection("photos");
-const showcaseContent = shuffleArray(collectionResponse.entries ?? []);
+const { entries, cacheHint } = await getLiveCollection("photos");
+
+if (cacheHint) {
+    const headers = cacheHeaders({
+        durable: true,
+        overrideDeployRevalidation: cacheHint.tags,
+        tags: cacheHint.tags,
+        ttl: YEAR,
+    });
+
+    for (const [key, value] of Object.entries(headers)) {
+        Astro.response.headers.set(key, value);
+    }
+}
 ---
 
-<PagesPhotos client:load data={showcaseContent} />
+<PagesPhotos client:only data={entries ?? []}>
+    <ul class="grid grid-cols-1 md:grid-cols-2 w-full gap-4" slot="fallback">
+        {
+            Array.from({ length: 4 }).map(() => (
+                <li class="bg-current/10 aspect-3/4 rounded-2xl w-full" />
+            ))
+        }
+    </ul>
+</PagesPhotos>

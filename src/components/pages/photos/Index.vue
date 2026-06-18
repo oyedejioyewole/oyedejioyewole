@@ -2,7 +2,10 @@
     <!-- Photo showcase -->
     <ul class="space-y-4 md:columns-2">
         <li
-            v-for="(photo, index) in resolvedMedia.slice(startIndex, endIndex)"
+            v-for="(photo, index) in shuffleArray(resolvedMedia).slice(
+                startIndex,
+                endIndex,
+            )"
             :key="photo.id"
             :data-index="index"
         >
@@ -23,11 +26,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, watchEffect } from "vue";
 import { useEventListener, useOffsetPagination } from "@vueuse/core";
+import { computed, watchEffect } from "vue";
 
-import type { Response } from "../../../loaders/pexels";
+import { shuffleArray } from "../../../utils/array";
+
 import type { LiveDataEntry } from "astro";
+import type { Response } from "../../../loaders/pexels";
 
 // 2nd pass to ensure uncached images are marked as loaded
 function onImageLoad(event: Event) {
@@ -54,23 +59,22 @@ const startIndex = computed(
 );
 const endIndex = computed(() => startIndex.value + currentPageSize.value);
 
-onMounted(() => {
-    const previousControlButtonRef = document.querySelector<HTMLButtonElement>(
-        "button[data-action=previous]",
-    )!;
-    const nextControlButtonRef = document.querySelector<HTMLButtonElement>(
-        "button[data-action=next]",
-    )!;
+// Pagination controls
+const previousControlButtonRef = document.querySelector<HTMLButtonElement>(
+    "button[data-action=previous]",
+)!;
+const nextControlButtonRef = document.querySelector<HTMLButtonElement>(
+    "button[data-action=next]",
+)!;
 
-    watchEffect(() => {
-        previousControlButtonRef.disabled = false;
-        nextControlButtonRef.disabled = false;
+watchEffect(() => {
+    previousControlButtonRef.disabled = false;
+    nextControlButtonRef.disabled = false;
 
-        if (isFirstPage.value) previousControlButtonRef.disabled = true;
-        else if (isLastPage.value) nextControlButtonRef.disabled = true;
-    });
-
-    useEventListener(previousControlButtonRef, "click", prev);
-    useEventListener(nextControlButtonRef, "click", next);
+    if (isFirstPage.value) previousControlButtonRef.disabled = true;
+    else if (isLastPage.value) nextControlButtonRef.disabled = true;
 });
+
+useEventListener(previousControlButtonRef, "click", prev);
+useEventListener(nextControlButtonRef, "click", next);
 </script>
