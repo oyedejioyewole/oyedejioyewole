@@ -23,7 +23,7 @@ export default async () => {
     .digest("hex");
 
   if (savedHash !== currentHash) {
-    await Promise.all([
+    await Promise.allSettled([
       purgeCache({ tags: ["showcase"] }),
       store.set(HASH_KEY, currentHash),
     ]);
