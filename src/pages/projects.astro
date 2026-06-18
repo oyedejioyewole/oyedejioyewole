@@ -10,6 +10,7 @@ import TailwindCSSIcon from "~icons/devicon/tailwindcss";
 import TauriIcon from "~icons/devicon/tauri";
 import TypescriptIcon from "~icons/devicon/typescript";
 import VuejsIcon from "~icons/devicon/vuejs";
+import AstroIcon from "~icons/devicon/astro";
 
 import LayoutBase from "../layouts/Base.astro";
 
@@ -35,18 +36,18 @@ const allProjects = await getCollection("projects");
                     <ContentH1>My projects.</ContentH1>
 
                     <ContentParagraph>
-                        These are some of the languages/frameworks I use in my
-                        projects.
+                        These are some of the spices I use in my projects.
                     </ContentParagraph>
 
                     <PagesProjectsLanguages
                         entries={[
+                            AstroIcon,
+                            NuxtjsIcon,
                             PythonIcon,
                             TailwindCSSIcon,
+                            TauriIcon,
                             TypescriptIcon,
                             VuejsIcon,
-                            NuxtjsIcon,
-                            TauriIcon,
                         ]}
                     />
                 </div>
