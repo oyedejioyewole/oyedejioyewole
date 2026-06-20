@@ -34,4 +34,4 @@ export default async () => {
   );
 };
 
-export const config = { schedule: "@weekly" } satisfies Config;
+export const config: Config = { schedule: "@weekly" };
