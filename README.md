@@ -9,7 +9,7 @@
 <br />
 
 <div align="center">
-	<a href="mailto://oyedejioyewole.q4e75@passinbox.com">
+	<a href="mailto:oyedejioyewole.q4e75@passinbox.com">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Contact_me-dfc1a9?style=for-the-badge&logo=protonmail&logoColor=544436" />
 			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Contact_me-544436?style=for-the-badge&logo=protonmail&logoColor=dfc1a9" />
