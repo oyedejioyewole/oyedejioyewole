@@ -16,7 +16,7 @@
 			<img alt="Contact Me" src="https://img.shields.io/badge/Contact_me-C8A586?style=for-the-badge&logo=protonmail&logoColor=white" />
 		</picture>
 	</a>
-	<a href="https://www.pexels.com/@oyedeji-oyewole-2149239433/" target="_blank">
+	<a href="https://www.pexels.com/@oyedeji-oyewole-2149239433/">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Pexels-dfc1a9?style=for-the-badge&logo=pexels&logoColor=544436" />
 			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Pexels-544436?style=for-the-badge&logo=pexels&logoColor=dfc1a9" />
@@ -26,21 +26,21 @@
 </div>
 
 <div align="center">
-	<a href="https://astro.build/" target="_blank">
+	<a href="https://astro.build/">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Astro-dfc1a9?style=for-the-badge&logo=astro&logoColor=544436" />
 			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Astro-544436?style=for-the-badge&logo=astro&logoColor=dfc1a9" />
 			<img alt="Astro" src="https://img.shields.io/badge/Astro-C8A586?style=for-the-badge&logo=astro&logoColor=white" />
 		</picture>
 	</a>
-	<a href="https://www.typescriptlang.org/" target="_blank">
+	<a href="https://www.typescriptlang.org/">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/TypeScript-dfc1a9?style=for-the-badge&logo=typescript&logoColor=544436" />
 			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/TypeScript-544436?style=for-the-badge&logo=typescript&logoColor=dfc1a9" />
 			<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-C8A586?style=for-the-badge&logo=typescript&logoColor=white" />
 		</picture>
 	</a>
-	<a href="https://vuejs.org/" target="_blank">
+	<a href="https://vuejs.org/">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Vue-dfc1a9?style=for-the-badge&logo=vue.js&logoColor=544436" />
 			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Vue-544436?style=for-the-badge&logo=vue.js&logoColor=dfc1a9" />
