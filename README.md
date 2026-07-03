@@ -2,7 +2,7 @@
 	<picture>
 		<source media="(prefers-color-scheme: dark)" srcset="./resources/logo.dark.animated.svg" />
 		<source media="(prefers-color-scheme: light)" srcset="./resources/logo.animated.svg" />
-		<img alt="Branding" src="./resources/logo.animated.svg" style="height: 5rem; aspect-ratio: 1 / 1;" align="center" width="100rem" />
+		<img alt="Branding" src="./resources/logo.animated.svg" width="100rem" />
 	</picture>
 </div>
 
