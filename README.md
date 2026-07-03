@@ -1,16 +1,15 @@
-<div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
+<div align="center">
 	<picture>
 		<source media="(prefers-color-scheme: dark)" srcset="./resources/logo.dark.animated.svg" />
 		<source media="(prefers-color-scheme: light)" srcset="./resources/logo.animated.svg" />
 		<img alt="Branding" src="./resources/logo.animated.svg" style="height: 5rem; aspect-ratio: 1 / 1;" align="center" width="100rem" />
 	</picture>
-	<h1 style="font-family: cursive;">Hey, I'm <u style="color: light-dark(#544436, #dfc1a9); text-underline-offset: .25rem;">Oyedeji</u></h1>
 </div>
 
 <br />
 
-<div style="display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;">
-	<a href="mailto:oyedejioyewole@gmail.com">
+<div align="center">
+	<a href="mailto://oyedejioyewole.q4e75@passinbox.com">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Contact_me-dfc1a9?style=for-the-badge&logo=protonmail&logoColor=544436" />
 			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Contact_me-544436?style=for-the-badge&logo=protonmail&logoColor=dfc1a9" />
@@ -26,7 +25,7 @@
 	</a>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;">
+<div align="center">
 	<a href="https://astro.build/" target="_blank">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Astro-dfc1a9?style=for-the-badge&logo=astro&logoColor=544436" />
@@ -52,7 +51,7 @@
 
 <br />
 
-<div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+<div align="center">
 	<img alt="GitHub Stats" src="https://github-stats-extended.vercel.app/api?username=oyedejioyewole&rank_icon=percentile&custom_title=My%20GitHub%20footprint&show_icons=true&include_all_commits=true&theme=moltack" />
 	<img alt="GitHub Streak" src="https://github-readme-streak-stats.herokuapp.com?user=oyedejioyewole&theme=moltack&hide_longest_streak=true" />
 </div>
