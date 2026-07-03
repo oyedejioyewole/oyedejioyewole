@@ -1,15 +1,58 @@
-# Hey, I'm Oyedeji
+<div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
+	<picture>
+		<source media="(prefers-color-scheme: dark)" srcset="./resources/logo.dark.animated.svg" />
+		<source media="(prefers-color-scheme: light)" srcset="./resources/logo.animated.svg" />
+		<img alt="Branding" src="./resources/logo.animated.svg" style="height: 5rem; aspect-ratio: 1 / 1;" align="center" width="100rem" />
+	</picture>
+	<h1 style="font-family: cursive;">Hey, I'm <u style="color: light-dark(#544436, #dfc1a9); text-underline-offset: .25rem;">Oyedeji</u></h1>
+</div>
 
-I'm a designer and have an eye for catchy designs. I'm also a full-stack developer and I love to code (in JavaScript/TypeScript particularly).
+<br />
 
-**PS**: I am building an empire called `TheMastermind's Tech` for true masterminds 🤓
+<div style="display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;">
+	<a href="mailto:oyedejioyewole@gmail.com">
+		<picture>
+			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Contact_me-dfc1a9?style=for-the-badge&logo=protonmail&logoColor=544436" />
+			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Contact_me-544436?style=for-the-badge&logo=protonmail&logoColor=dfc1a9" />
+			<img alt="Contact Me" src="https://img.shields.io/badge/Contact_me-C8A586?style=for-the-badge&logo=protonmail&logoColor=white" />
+		</picture>
+	</a>
+	<a href="https://www.pexels.com/@oyedeji-oyewole-2149239433/" target="_blank">
+		<picture>
+			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Pexels-dfc1a9?style=for-the-badge&logo=pexels&logoColor=544436" />
+			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Pexels-544436?style=for-the-badge&logo=pexels&logoColor=dfc1a9" />
+			<img alt="Pexels" src="https://img.shields.io/badge/Pexels-C8A586?style=for-the-badge&logo=pexels&logoColor=white" />
+		</picture>
+	</a>
+</div>
 
-## Stats
+<div style="display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;">
+	<a href="https://astro.build/" target="_blank">
+		<picture>
+			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Astro-dfc1a9?style=for-the-badge&logo=astro&logoColor=544436" />
+			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Astro-544436?style=for-the-badge&logo=astro&logoColor=dfc1a9" />
+			<img alt="Astro" src="https://img.shields.io/badge/Astro-C8A586?style=for-the-badge&logo=astro&logoColor=white" />
+		</picture>
+	</a>
+	<a href="https://www.typescriptlang.org/" target="_blank">
+		<picture>
+			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/TypeScript-dfc1a9?style=for-the-badge&logo=typescript&logoColor=544436" />
+			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/TypeScript-544436?style=for-the-badge&logo=typescript&logoColor=dfc1a9" />
+			<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-C8A586?style=for-the-badge&logo=typescript&logoColor=white" />
+		</picture>
+	</a>
+	<a href="https://vuejs.org/" target="_blank">
+		<picture>
+			<source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Vue-dfc1a9?style=for-the-badge&logo=vue.js&logoColor=544436" />
+			<source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Vue-544436?style=for-the-badge&logo=vue.js&logoColor=dfc1a9" />
+			<img alt="Vue" src="https://img.shields.io/badge/Vue-C8A586?style=for-the-badge&logo=vue.js&logoColor=white" />
+		</picture>
+	</a>
+</div>
 
-[![My GitHub stats](https://github-readme-stats.vercel.app/api?username=oyedejioyewole&show_icons=true&theme=graywhite)](https://github.com/oyedejioyewole/github-readme-stats)
+<br />
 
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=oyedejioyewole&theme=graywhite&border_radius=10)](https://git.io/streak-stats)
-
-## Spotify
-
-[![spotify-github-profile](https://spotify-github-profile.vercel.app/api/view?uid=31oyirbqcghhl5nwj44kg7g7lnsa&cover_image=true&theme=novatorem&show_offline=true&background_color=53b14f&interchange=false&bar_color=000000&bar_color_cover=false)](https://github.com/kittinan/spotify-github-profile)
+<div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+	<img alt="GitHub Stats" src="https://github-stats-extended.vercel.app/api?username=oyedejioyewole&rank_icon=percentile&custom_title=My%20GitHub%20footprint&show_icons=true&include_all_commits=true&theme=moltack" />
+	<img alt="GitHub Streak" src="https://github-readme-streak-stats.herokuapp.com?user=oyedejioyewole&theme=moltack&hide_longest_streak=true" />
+</div>
