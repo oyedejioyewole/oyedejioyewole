@@ -7,9 +7,16 @@ import tailwindcss from "@tailwindcss/vite";
 import Icons from "unplugin-icons/vite";
 
 import netlify from "@astrojs/netlify";
+import { cacheNetlify } from "@astrojs/netlify/cache";
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: netlify(),
+
+  cache: {
+    provider: cacheNetlify(),
+  },
+
   env: {
     schema: {
       PEXELS_API_KEY: envField.string({ context: "server", access: "secret" }),
@@ -46,8 +53,6 @@ export default defineConfig({
   integrations: [vue()],
 
   vite: {
-    plugins: [tailwindcss(), Icons({ compiler: "astro" })],
+    plugins: [tailwindcss(), Icons({ compiler: "vue3" })],
   },
-
-  adapter: netlify(),
 });

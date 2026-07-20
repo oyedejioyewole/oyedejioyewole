@@ -13,53 +13,53 @@ import AppNavigation from "../components/app/Navigation.astro";
 import AppFooter from "../components/app/Footer.astro";
 
 interface Props {
-    title: string;
-    class?: string;
+  title: string;
+  class?: string;
 }
 ---
 
 <!doctype html>
 <html class="scroll-smooth" lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{Astro.props.title} · Oyedeji Oyewole</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{Astro.props.title} · Oyedeji Oyewole</title>
 
-        <ClientRouter />
+    <ClientRouter />
 
-        <Themes />
+    <Themes />
 
-        <Font cssVariable="--font-croissant-one" />
-        <Font cssVariable="--font-playfair-display" />
-        <Font cssVariable="--font-poppins" />
-    </head>
-    <body
-        class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 selection:bg-primary-500/50 cursor-crosshair overflow-x-hidden"
-    >
-        <CursorTracking />
-        <PathTransition />
+    <Font cssVariable="--font-croissant-one" />
+    <Font cssVariable="--font-playfair-display" />
+    <Font cssVariable="--font-poppins" />
+  </head>
+  <body
+    class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 selection:bg-primary-500/50 cursor-crosshair overflow-x-hidden"
+  >
+    <CursorTracking />
+    <PathTransition />
 
-        <div class="grid grid-cols-5">
-            <!-- Left Sidebar -->
-            <AppNavigation />
+    <div class="grid grid-cols-5">
+      <!-- Left Sidebar -->
+      <AppNavigation />
 
-            <!-- Content -->
-            <main class="col-span-5 xl:col-span-4">
-                <section
-                    class={twMerge(
-                        "grid min-h-screen grid-cols-12 xl:grid-cols-8",
-                        Astro.props.class,
-                    )}
-                >
-                    <slot />
-                </section>
+      <!-- Content -->
+      <main class="col-span-full xl:col-span-4">
+        <section
+          class={twMerge(
+            "grid min-h-screen grid-cols-12 xl:grid-cols-8",
+            Astro.props.class,
+          )}
+        >
+          <slot />
+        </section>
 
-                <!-- Footer -->
-                {Astro.url.pathname !== "/" && <AppFooter />}
-            </main>
-        </div>
-    </body>
+        <!-- Footer -->
+        {Astro.url.pathname !== "/" && <AppFooter />}
+      </main>
+    </div>
+  </body>
 </html>

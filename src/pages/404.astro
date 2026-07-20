@@ -2,23 +2,23 @@
 import LayoutBase from "../layouts/Base.astro";
 
 import ContentH1 from "../components/content/H1.astro";
-import ContentParagraph from "../components/content/Paragraph.astro";
+import ContentParagraph from "../components/content/Paragraph.vue";
 ---
 
 <LayoutBase title="404">
-    <section
-        class="grid min-h-screen place-content-center col-[2/12] xl:col-[2/8] text-center"
+  <section
+    class="grid min-h-screen place-content-center col-[2/12] xl:col-[2/8] text-center"
+  >
+    <ContentParagraph
+      >Hmm, that's <i class="font-serif font-bold">weird</i>, a</ContentParagraph
     >
-        <ContentParagraph
-            >Hmm, that's <i class="font-serif font-bold">weird</i>, a</ContentParagraph
-        >
 
-        <ContentH1 class="text-[10dvw]"> 404 </ContentH1>
+    <ContentH1 class="text-[10dvw]"> 404 </ContentH1>
 
-        <ContentParagraph class="max-w-md text-pretty"
-            ><i class="font-serif font-bold">Reason:</i> You tried visiting >_ {
-                Astro.url.pathname
-            }</ContentParagraph
-        >
-    </section>
+    <ContentParagraph class="max-w-md text-pretty"
+      ><i class="font-serif font-bold">Reason:</i> You tried visiting >_ {
+        Astro.url.pathname
+      }</ContentParagraph
+    >
+  </section>
 </LayoutBase>

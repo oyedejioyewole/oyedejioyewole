@@ -1,28 +1,28 @@
 ---
-import type { FunctionalComponent } from "vue";
+import type { FunctionalComponent, SVGAttributes } from "vue";
 
 interface Props {
-    entries: Array<FunctionalComponent>;
+  entries: Array<FunctionalComponent<SVGAttributes>>;
 }
 
 const { entries } = Astro.props;
 ---
 
 <ul
-    class="flex w-fit justify-center gap-x-2 rounded-xl border-current/30 bg-current/10 px-5 py-3 backdrop-blur-lg transition-all duration-300 hover:gap-x-4 hover:border-current/70 focus:gap-x-4"
-    data-snap-cursor
+  class="flex w-fit justify-center gap-x-2 rounded-xl border-current/30 bg-current/10 px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:gap-x-3 shadow shadow-current/30 hover:border-current/70 focus:gap-x-2"
+  data-snap-cursor
 >
-    {
-        entries.map((entry) => {
-            const Component = entry;
+  {
+    entries.map((entry) => {
+      const Component = entry;
 
-            return (
-                <li>
-                    <Component class="size-6" />
-                </li>
-            );
-        })
-    }
+      return (
+        <li>
+          <Component class="size-6" />
+        </li>
+      );
+    })
+  }
 
-    <span class="sr-only">Expand my skills</span>
+  <span class="sr-only">Expand my skills</span>
 </ul>

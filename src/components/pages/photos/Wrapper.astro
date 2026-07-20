@@ -1,31 +1,20 @@
 ---
-import { YEAR, cacheHeaders } from "@netlify/cache";
+import { YEAR } from "@netlify/cache";
 import { getLiveCollection } from "astro:content";
 
 import PagesPhotos from "./Index.vue";
 
 const { entries, cacheHint } = await getLiveCollection("photos");
 
-if (cacheHint) {
-    const headers = cacheHeaders({
-        durable: true,
-        overrideDeployRevalidation: cacheHint.tags,
-        tags: cacheHint.tags,
-        ttl: YEAR,
-    });
-
-    for (const [key, value] of Object.entries(headers)) {
-        Astro.response.headers.set(key, value);
-    }
-}
+if (Astro.cache.enabled) Astro.cache.set({ ...cacheHint, maxAge: YEAR });
 ---
 
 <PagesPhotos client:only data={entries ?? []}>
-    <ul class="grid grid-cols-1 md:grid-cols-2 w-full gap-4" slot="fallback">
-        {
-            Array.from({ length: 4 }).map(() => (
-                <li class="bg-current/10 aspect-3/4 rounded-2xl w-full brightness-70" />
-            ))
-        }
-    </ul>
+  <ul class="grid grid-cols-1 md:grid-cols-2 w-full gap-4" slot="fallback">
+    {
+      Array.from({ length: 4 }).map(() => (
+        <li class="bg-current/10 aspect-3/4 rounded-2xl w-full brightness-70" />
+      ))
+    }
+  </ul>
 </PagesPhotos>

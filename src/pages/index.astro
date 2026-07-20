@@ -2,35 +2,34 @@
 import { Image } from "astro:assets";
 
 import LayoutBase from "../layouts/Base.astro";
-import ContentParagraph from "../components/content/Paragraph.astro";
-import ContentLink from "../components/content/Link.astro";
+import ContentParagraph from "../components/content/Paragraph.vue";
+import ContentLink from "../components/content/Link.vue";
 import ContentH1 from "../components/content/H1.astro";
 ---
 
 <LayoutBase
-    class="min-h-[calc(96dvh-46px)] xl:min-h-dvh xl:grid-cols-4"
-    title="Home"
+  class="min-h-[calc(96dvh-46px)] xl:min-h-dvh xl:grid-cols-4"
+  title="Home"
 >
-    <div
-        class="col-[2/12] grid place-content-center place-items-center gap-y-8 text-center text-pretty xl:col-[2/4]"
-    >
-        {/* Identity x profile picture */}
-        <Image
-            alt="A young lad."
-            class="size-40 rounded-lg bg-current/10 outline outline-offset-4 transition duration-300 outline-dashed hover:-translate-y-2 hover:scale-110 hover:rotate-5 hover:outline-solid"
-            data-morph-cursor
-            inferSize
-            priority
-            src="https://avatars.githubusercontent.com/u/57059138?s=240&v=4"
-        />
+  <div
+    class="col-[2/12] grid place-content-center place-items-center gap-y-8 text-center text-pretty xl:col-[2/4]"
+  >
+    {/* Identity x profile picture */}
+    <Image
+      alt="A young lad."
+      class="size-40 rounded-lg bg-current/10 outline outline-offset-4 transition duration-300 outline-dashed hover:-translate-y-2 hover:scale-110 hover:rotate-5 hover:outline-solid"
+      data-morph-cursor
+      inferSize
+      priority
+      src="https://avatars.githubusercontent.com/u/57059138?s=240&v=4"
+    />
 
-        <ContentH1>Hey, I'm Oyedeji.</ContentH1>
+    <ContentH1>Hey, I'm Oyedeji.</ContentH1>
 
-        <ContentParagraph class="font-serif max-w-md text-2xl">
-            And I'm a <ContentLink href="/projects"
-                ><em>developer</em></ContentLink
-            > & <ContentLink href="/photos"><em>photographer</em></ContentLink> based
-            in <em>Abuja, Nigeria.</em>
-        </ContentParagraph>
-    </div>
+    <ContentParagraph class="font-serif max-w-md text-2xl leading-relaxed">
+      And I'm a <ContentLink href="/projects"><em>developer</em></ContentLink> & <ContentLink
+        href="/photos"><em>photographer</em></ContentLink
+      > based in <em>Abuja, Nigeria.</em>
+    </ContentParagraph>
+  </div>
 </LayoutBase>

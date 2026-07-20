@@ -1,17 +1,15 @@
 ---
 import ProseH1 from "../../content/H1.astro";
 
-import type { CollectionEntry } from "astro:content";
+import type { GridProps } from "./Grid.vue";
 
-interface Props {
-  data: CollectionEntry<"projects">[];
-}
+interface Props extends GridProps {}
 
 const { data: allProjects } = Astro.props;
 
 const projectsStatistics = allProjects.reduce(
   (stats, project) => {
-    if (project.data.isDraft) stats.inProgress++;
+    if (project.isDraft) stats.inProgress++;
     else stats.completed++;
 
     return stats;
