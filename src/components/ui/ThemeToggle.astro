@@ -1,18 +1,23 @@
 ---
-import DesktopDuotone from "~icons/ph/desktop-duotone";
+import { buttonVariants } from "../../utils/variants";
 
-import UiButton from "./Button.astro";
+import DesktopDuotone from "~icons/ph/desktop-duotone";
 
 interface Props {
   class?: string;
 }
 ---
 
-<UiButton class={Astro.props.class} data-theme-toggle transition:persist>
+<button
+  class={buttonVariants({ iconOnly: true })}
+  data-snap-cursor
+  data-theme-toggle
+  transition:persist
+>
   <DesktopDuotone class="size-5" />
 
   <span class="sr-only">Using fallback theme</span>
-</UiButton>
+</button>
 
 <script>
   import SunDuotone from "~icons/ph/sun-duotone?raw&width=20px&height=20px";

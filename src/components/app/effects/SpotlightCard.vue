@@ -1,11 +1,11 @@
 <template>
   <component
-    :is="$props.to ? 'a' : 'button'"
+    :is="$props.to ? 'a' : 'div'"
     :href="$props.to"
     :rel="$props.to && 'noopener noreferrer'"
     :target="$props.to && '_blank'"
     data-spotlight-card
-    class="relative overflow-hidden rounded-2xl border-[1.5px] border-current/30 bg-current/10 p-8 text-left backdrop-blur-sm transition duration-300 hover:border-current/70"
+    class="relative bg-current/10 backdrop-blur-sm p-8 border border-current/30 hover:border-current/70 rounded-2xl overflow-hidden text-left transition duration-300"
     style="--spotlight-opacity: 0; --spotlight-x: 0px; --spotlight-y: 0px"
     @mousemove="handleMouseMove"
     @focus="handleFocus"
@@ -14,7 +14,7 @@
     @mouseleave="handleMouseLeave"
   >
     <div
-      class="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300"
+      class="absolute inset-0 opacity-0 rounded-2xl transition-opacity duration-300 pointer-events-none"
       :style="spotlightStyle"
     />
 
@@ -34,12 +34,14 @@ const props = defineProps<Props>();
 
 const spotlightStyle = computed(() => ({
   opacity: `var(--spotlight-opacity)`,
-  background: `radial-gradient(circle at var(--spotlight-x) var(--spotlight-y), ${props.spotlightColor}, transparent 80%)`,
+  background: `radial-gradient(circle at var(--spotlight-x) var(--spotlight-y), ${props.spotlightColor}, transparent 70%)`,
 }));
 
 function handleMouseMove(event: MouseEvent) {
   const button = event.currentTarget as
-    HTMLButtonElement | HTMLAnchorElement | null;
+    | HTMLButtonElement
+    | HTMLAnchorElement
+    | null;
 
   if (!button) return;
 
@@ -50,7 +52,7 @@ function handleMouseMove(event: MouseEvent) {
 }
 
 function handleFocus(event: FocusEvent) {
-  setSpotlightOpacity(event.currentTarget, "0.6");
+  setSpotlightOpacity(event.currentTarget, "0.5");
 }
 
 function handleBlur(event: FocusEvent) {
@@ -59,7 +61,7 @@ function handleBlur(event: FocusEvent) {
 
 function handleMouseEnter(event: MouseEvent) {
   console.info(event.currentTarget);
-  setSpotlightOpacity(event.currentTarget, "0.6");
+  setSpotlightOpacity(event.currentTarget, "0.5");
 }
 
 function handleMouseLeave(event: MouseEvent) {
@@ -68,10 +70,7 @@ function handleMouseLeave(event: MouseEvent) {
 }
 
 function setSpotlightOpacity(target: EventTarget | null, value: string) {
-  if (!(
-    target instanceof HTMLButtonElement || target instanceof HTMLAnchorElement
-  ))
-    return;
+  if (!(target instanceof HTMLElement)) return;
 
   target.style.setProperty("--spotlight-opacity", value);
 }

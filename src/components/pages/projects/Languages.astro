@@ -2,27 +2,31 @@
 import type { FunctionalComponent, SVGAttributes } from "vue";
 
 interface Props {
-  entries: Array<FunctionalComponent<SVGAttributes>>;
+  entries: FunctionalComponent<SVGAttributes>[];
 }
 
 const { entries } = Astro.props;
 ---
 
-<ul
-  class="flex w-fit justify-center gap-x-2 rounded-xl border-current/30 bg-current/10 px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:gap-x-3 shadow shadow-current/30 hover:border-current/70 focus:gap-x-2"
+<button
+  class="group bg-current/10 shadow shadow-current/30 backdrop-blur-sm px-5 py-3 rounded-full outline-none focus:ring w-fit h-15"
   data-snap-cursor
 >
-  {
-    entries.map((entry) => {
-      const Component = entry;
+  <ul
+    class="flex justify-center gap-x-2 group-focus:gap-x-3 group-hover:gap-x-3 transition-all duration-300"
+  >
+    {
+      entries.map((entry) => {
+        const Component = entry;
 
-      return (
-        <li>
-          <Component class="size-6" />
-        </li>
-      );
-    })
-  }
+        return (
+          <li>
+            <Component class="size-6" />
+          </li>
+        );
+      })
+    }
+  </ul>
 
   <span class="sr-only">Expand my skills</span>
-</ul>
+</button>

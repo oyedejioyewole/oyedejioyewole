@@ -1,4 +1,6 @@
 ---
+import { buttonVariants } from "../../utils/variants";
+
 import HouseDuotone from "~icons/ph/house-duotone";
 import SlideshowDuotone from "~icons/ph/slideshow-duotone";
 import FolderOpenDuotone from "~icons/ph/folder-open-duotone";
@@ -7,7 +9,6 @@ import List from "~icons/ph/list";
 import X from "~icons/ph/x";
 
 import UiBranding from "../ui/Branding.astro";
-import UiButton from "../ui/Button.astro";
 
 import UiThemeToggle from "../ui/ThemeToggle.astro";
 
@@ -33,13 +34,13 @@ const navigationLinks = [
     /* For mobile: invisible by default, slides up after enterSequence() completes */
   }
   <nav
-    class="group dark:text-primary-700 text-primary-300 fixed top-0 z-20 grid h-dvh w-full invisible"
+    class="group invisible top-0 z-20 fixed grid w-full h-dvh text-primary-300 dark:text-primary-700"
     id="mobile-navigation"
   >
-    <ul class="row-span-2 grid place-items-center">
+    <ul class="place-items-center grid row-span-2">
       {
         navigationLinks.map((link) => (
-          <li class="translate-y-10 opacity-0">
+          <li class="opacity-0 translate-y-10">
             <a
               class="inline-flex items-center gap-x-4 font-serif text-4xl"
               href={link.to}
@@ -53,25 +54,33 @@ const navigationLinks = [
       }
     </ul>
 
-    <div class="mx-auto space-y-4 self-center translate-y-10 opacity-0">
+    <div class="self-center space-y-4 opacity-0 mx-auto translate-y-10">
       <UiThemeToggle />
 
-      <UiButton data-navigation-toggle="close" transition:persist>
+      <button
+        class={buttonVariants({ class: "has-[svg]:flex", iconOnly: true })}
+        data-navigation-toggle="close"
+        transition:persist
+      >
         <X class="size-5" />
         <span class="sr-only">Close mobile menu</span>
-      </UiButton>
+      </button>
     </div>
   </nav>
 
   <!-- Mobile header bar -->
-  <nav class="mt-[4dvh] grid grid-cols-12 xl:hidden">
-    <div class="col-[2/12] flex items-center justify-between">
+  <nav class="xl:hidden grid grid-cols-12 mt-[4dvh]">
+    <div class="flex justify-between items-center col-[2/12]">
       <UiBranding class="size-10" />
 
-      <UiButton data-navigation-toggle="open" transition:persist>
+      <button
+        class={buttonVariants({ iconOnly: true })}
+        data-navigation-toggle="open"
+        transition:persist
+      >
         <List class="size-5" />
         <span class="sr-only">Open mobile menu</span>
-      </UiButton>
+      </button>
     </div>
   </nav>
 
@@ -80,7 +89,7 @@ const navigationLinks = [
   }
   <nav
     id="desktop-navigation"
-    class="sticky top-0 hidden h-screen place-items-center border-r border-current/30 backdrop-blur-md transition-colors hover:border-current/70 xl:grid"
+    class="hidden top-0 sticky place-items-center xl:grid backdrop-blur-md border-current/30 hover:border-current/70 border-r h-screen transition-colors"
   >
     <ul class="flex flex-wrap justify-center gap-y-2">
       {
@@ -116,7 +125,7 @@ const navigationLinks = [
 
   let directNavigationRequested = false;
 
-  async function openNavigation() {
+  function openNavigation() {
     const mobileNavigation = document.querySelector("nav#mobile-navigation")!;
     mobileNavigation.classList.remove("invisible");
 

@@ -1,5 +1,5 @@
 ---
-import { twMerge } from "tailwind-merge";
+import { cn } from "tailwind-variants";
 
 interface Props {
   class?: string;
@@ -7,7 +7,7 @@ interface Props {
 ---
 
 <svg
-  class={twMerge("size-20 row-span-3", Astro.props.class)}
+  class={cn("row-span-3 size-20", Astro.props.class)}
   data-snap-cursor
   height="635.754"
   viewBox="0 0 225.617 168.21"

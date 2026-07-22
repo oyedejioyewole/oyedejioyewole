@@ -18,16 +18,16 @@ const projectsStatistics = allProjects.reduce(
 );
 ---
 
-<section class="grid min-h-screen grid-cols-8 place-content-center items-start">
+<section class="items-start place-content-center grid grid-cols-8 min-h-screen">
   <div class="space-y-8 col-span-full">
     <ProseH1>My stats.</ProseH1>
 
     <div
-      class="group grid min-h-[50vh] gap-4 rounded-2xl border-current/30 backdrop-blur-lg transition-[gap] duration-300 hover:gap-0 hover:border-current/70 lg:grid-cols-2"
+      class="group gap-4 hover:gap-0 grid lg:grid-cols-2 backdrop-blur-lg border-current/30 hover:border-current/70 rounded-2xl min-h-[50vh] transition-[gap] duration-300"
       data-snap-cursor
     >
       <div
-        class="grid place-content-center space-y-4 rounded-l-2xl border border-current/30 bg-current/10 text-center transition-all duration-300 max-xl:rounded-2xl max-lg:group-hover:rounded-b-none lg:group-hover:rounded-r-none"
+        class="place-content-center space-y-4 grid bg-current/10 border border-current/30 max-xl:rounded-2xl lg:group-hover:rounded-r-none max-lg:group-hover:rounded-b-none rounded-l-2xl text-center transition-all duration-300"
       >
         <span>I've completed</span>
         <p class="font-display text-3xl lg:text-5xl">
@@ -37,7 +37,7 @@ const projectsStatistics = allProjects.reduce(
       </div>
 
       <div
-        class="grid place-content-center space-y-4 rounded-r-2xl border border-current/30 bg-current/10 text-center transition-all duration-300 max-xl:rounded-2xl max-lg:group-hover:rounded-t-none lg:group-hover:rounded-l-none"
+        class="place-content-center space-y-4 grid bg-current/10 border border-current/30 max-xl:rounded-2xl max-lg:group-hover:rounded-t-none rounded-r-2xl lg:group-hover:rounded-l-none text-center transition-all duration-300"
       >
         <span>I'm currently working on</span>
         <p class="font-display text-3xl lg:text-5xl">

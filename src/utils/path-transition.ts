@@ -21,9 +21,7 @@ export async function exitSequence() {
   );
 }
 
-export async function enterSequence(onComplete?: () => Promise<void>) {
-  pathTransition.classList.remove("invisible");
-
+export async function enterSequence(onComplete?: () => Promise<void> | void) {
   await animate(
     pathTransition.querySelector("path"),
     {
@@ -31,7 +29,7 @@ export async function enterSequence(onComplete?: () => Promise<void>) {
       pathOffset: [0, 0],
       ...(window.innerWidth >= 1280 && { strokeWidth: [2, 250] }),
     },
-    { duration: 1 },
+    { duration: 1, onPlay: () => pathTransition.classList.remove("invisible") },
   );
 
   if (onComplete) await onComplete();

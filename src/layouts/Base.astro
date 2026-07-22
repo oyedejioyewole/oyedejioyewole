@@ -3,7 +3,7 @@ import Themes from "astro-themes";
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
-import { twMerge } from "tailwind-merge";
+import { cn } from "tailwind-variants";
 
 import "../styles/global.css";
 
@@ -37,7 +37,7 @@ interface Props {
     <Font cssVariable="--font-poppins" />
   </head>
   <body
-    class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 selection:bg-primary-500/50 cursor-crosshair overflow-x-hidden"
+    class="bg-primary-100 selection:bg-primary-500/50 dark:bg-primary-900 overflow-x-hidden text-primary-700 dark:text-primary-300 cursor-crosshair"
   >
     <CursorTracking />
     <PathTransition />
@@ -49,8 +49,8 @@ interface Props {
       <!-- Content -->
       <main class="col-span-full xl:col-span-4">
         <section
-          class={twMerge(
-            "grid min-h-screen grid-cols-12 xl:grid-cols-8",
+          class={cn(
+            "grid grid-cols-12 xl:grid-cols-8 min-h-screen",
             Astro.props.class,
           )}
         >

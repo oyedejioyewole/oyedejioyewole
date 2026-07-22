@@ -1,4 +1,6 @@
 ---
+import { buttonVariants } from "../utils/variants";
+
 import CaretLeftIcon from "~icons/ph/caret-left";
 import CaretRightIcon from "~icons/ph/caret-right";
 import CircleNotchIcon from "~icons/ph/circle-notch-thin";
@@ -12,10 +14,10 @@ import PagesPhotosWrapper from "../components/pages/photos/Wrapper.astro";
 ---
 
 <LayoutBase title="My photos">
-  <div class="col-[2/12] space-y-8 xl:col-[2/8]">
-    <div class="flex h-[50vh] items-center">
+  <div class="space-y-8 col-[2/12] xl:col-[2/8]">
+    <div class="flex items-center h-[50vh]">
       <div
-        class="flex w-full justify-between gap-y-8 max-xl:flex-col xl:items-end"
+        class="flex max-xl:flex-col justify-between xl:items-end gap-y-8 w-full"
       >
         <div class="space-y-8 xl:max-w-md">
           <ContentH1>My photos.</ContentH1>
@@ -28,8 +30,9 @@ import PagesPhotosWrapper from "../components/pages/photos/Wrapper.astro";
 
         <div class="flex items-center gap-x-4" data-snap-cursor>
           <button
-            class="cursor-pointer rounded-full border border-current/30 bg-current/10 px-5 py-3 backdrop-blur-lg transition duration-300 hover:border-current/70 disabled:cursor-not-allowed disabled:opacity-50"
+            class={buttonVariants({ iconOnly: true })}
             data-action="previous"
+            data-snap-cursor
             disabled
           >
             <CaretLeftIcon />
@@ -37,8 +40,9 @@ import PagesPhotosWrapper from "../components/pages/photos/Wrapper.astro";
           </button>
 
           <button
-            class="cursor-pointer rounded-full border border-current/30 bg-current/10 px-5 py-3 backdrop-blur-lg transition duration-300 hover:border-current/70 disabled:cursor-not-allowed disabled:opacity-50"
+            class={buttonVariants({ iconOnly: true })}
             data-action="next"
+            data-snap-cursor
             disabled
           >
             <CaretRightIcon />
@@ -49,12 +53,12 @@ import PagesPhotosWrapper from "../components/pages/photos/Wrapper.astro";
     </div>
 
     <section
-      class="group mb-[16.65vh] grid place-items-center space-y-4 rounded-2xl border border-current/30 bg-current/10 p-8 backdrop-blur-lg transition duration-300 hover:border-current/70"
+      class="group place-items-center space-y-4 grid bg-current/10 backdrop-blur-lg mb-[16.65vh] p-8 border border-current/30 hover:border-current/70 rounded-2xl transition duration-300"
       data-snap-cursor
     >
       <PagesPhotosWrapper server:defer>
         <CircleNotchIcon
-          class="size-20 opacity-70 transition duration-300 group-hover:opacity-100 animate-spin"
+          class="opacity-70 group-hover:opacity-100 size-20 transition animate-spin duration-300"
           slot="fallback"
         />
       </PagesPhotosWrapper>
