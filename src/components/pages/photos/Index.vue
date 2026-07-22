@@ -26,7 +26,7 @@
   </ul>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import { useEventListener, useOffsetPagination } from "@vueuse/core";
 import { computed, watchEffect } from "vue";
 
@@ -34,15 +34,17 @@ import { shuffleArray } from "../../../utils/array";
 
 import type { LiveDataEntry } from "astro";
 import type { Response } from "../../../loaders/pexels";
+</script>
+
+<script lang="ts" setup>
+// 1st pass to ensure images gotten from cache are marked as loaded
+function onImageRef(element: HTMLImageElement | null) {
+  if (element?.complete) element.dataset["loaded"] = "true";
+}
 
 // 2nd pass to ensure uncached images are marked as loaded
 function onImageLoad(event: Event) {
   (event.target as HTMLImageElement).dataset["loaded"] = "true";
-}
-
-// 1st pass to ensure images gotten from cache are marked as loaded
-function onImageRef(element: HTMLImageElement | null) {
-  if (element?.complete) element.dataset["loaded"] = "true";
 }
 
 const { data: resolvedMedia } = defineProps<{

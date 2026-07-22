@@ -1,21 +1,12 @@
 <template>
   <a
-    :class="
-      cn(
-        'hover:text-primary-700 dark:hover:text-primary-300 relative inline-block font-serif tracking-wide group/link',
-        $attrs.class,
-      )
-    "
+    class="group/link inline-block relative font-serif hover:text-primary-700 dark:hover:text-primary-300 tracking-wide"
     data-snap-cursor
   >
     <slot />
 
     <span
-      class="absolute inset-x-0 bottom-0 h-px origin-bottom bg-current transition-all duration-300 group-hover/link:bottom-[35%] group-hover/link:h-0.5"
+      class="bottom-0 group-hover/link:bottom-[35%] absolute inset-x-0 bg-current h-px group-hover/link:h-0.5 origin-bottom transition-all duration-300"
     ></span>
   </a>
 </template>
-
-<script lang="ts" setup>
-import { cn } from "tailwind-variants";
-</script>
