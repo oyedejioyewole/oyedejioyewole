@@ -15,6 +15,7 @@
           :ref="onImageRef"
           class="brightness-70 transition duration-300 hover:brightness-100 bg-current/10 hover:cursor-none [&:not([data-loaded])]:aspect-3/4 rounded-2xl"
           data-morph-cursor
+          rel="noopener noreferrer"
           width="940"
           :alt="`Pexels ID: ${photo.id}`"
           :src="photo.data.image.src"

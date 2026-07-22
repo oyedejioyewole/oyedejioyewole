@@ -1,6 +1,6 @@
 ---
-import { Font } from "astro:assets";
 import Themes from "astro-themes";
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
 import { twMerge } from "tailwind-merge";
@@ -9,8 +9,8 @@ import "../styles/global.css";
 
 import CursorTracking from "../components/app/effects/CursorTracking.astro";
 import PathTransition from "../components/app/effects/PathTransition.astro";
-import AppNavigation from "../components/app/Navigation.astro";
 import AppFooter from "../components/app/Footer.astro";
+import AppNavigation from "../components/app/Navigation.astro";
 
 interface Props {
   title: string;
