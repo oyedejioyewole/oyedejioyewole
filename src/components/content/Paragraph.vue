@@ -4,7 +4,7 @@
       $props.hasAccent
         ? 'text-current'
         : 'text-primary-900 dark:text-primary-100',
-      ' leading-relaxed',
+      'leading-relaxed',
     ]"
   >
     <slot />

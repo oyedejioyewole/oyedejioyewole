@@ -1,5 +1,5 @@
 ---
-import ProseH1 from "../../content/H1.astro";
+import ContentH1 from "../../content/H1.astro";
 
 import type { GridProps } from "./Grid.vue";
 
@@ -20,7 +20,7 @@ const projectsStatistics = allProjects.reduce(
 
 <section class="items-start place-content-center grid grid-cols-8 min-h-screen">
   <div class="space-y-8 col-span-full">
-    <ProseH1>My stats.</ProseH1>
+    <ContentH1>My stats.</ContentH1>
 
     <div
       class="group gap-4 hover:gap-0 grid lg:grid-cols-2 backdrop-blur-lg border-current/30 hover:border-current/70 rounded-2xl min-h-[50vh] transition-[gap] duration-300"

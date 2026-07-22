@@ -1,4 +1,5 @@
 ---
+import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
 import Themes from "astro-themes";
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
@@ -14,6 +15,7 @@ import AppNavigation from "../components/app/Navigation.astro";
 
 interface Props {
   title: string;
+  description?: string;
   class?: string;
 }
 ---
@@ -23,10 +25,16 @@ interface Props {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{Astro.props.title} · Oyedeji Oyewole</title>
+
+    <Seo
+      description={Astro.props.description}
+      title={`${Astro.props.title} · Oyedeji Oyewole`}
+      extraLinks={[
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+        { rel: "icon", href: "/favicon.ico" },
+      ]}
+    />
 
     <ClientRouter />
 
@@ -37,7 +45,7 @@ interface Props {
     <Font cssVariable="--font-poppins" />
   </head>
   <body
-    class="bg-primary-100 selection:bg-primary-500/50 dark:bg-primary-900 overflow-x-hidden text-primary-700 dark:text-primary-300 cursor-crosshair"
+    class="bg-primary-100 selection:bg-current/20 dark:bg-primary-900 overflow-x-hidden text-primary-700 dark:text-primary-300 cursor-crosshair"
   >
     <CursorTracking />
     <PathTransition />
@@ -50,7 +58,7 @@ interface Props {
       <main class="col-span-full xl:col-span-4">
         <section
           class={cn(
-            "grid grid-cols-12 xl:grid-cols-8 min-h-screen",
+            "grid grid-cols-12 xl:grid-cols-8 min-h-[calc(96dvh-46px)] xl:min-h-dvh",
             Astro.props.class,
           )}
         >

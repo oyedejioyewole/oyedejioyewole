@@ -1,14 +1,15 @@
 ---
 import { Image } from "astro:assets";
 
-import LayoutBase from "../layouts/Base.astro";
-import ContentParagraph from "../components/content/Paragraph.vue";
-import ContentLink from "../components/content/Link.vue";
 import ContentH1 from "../components/content/H1.astro";
+import ContentLink from "../components/content/Link.vue";
+import ContentParagraph from "../components/content/Paragraph.vue";
+import LayoutBase from "../layouts/Base.astro";
 ---
 
 <LayoutBase
-  class="xl:grid-cols-4 min-h-[calc(96dvh-46px)] xl:min-h-dvh"
+  class="xl:grid-cols-4"
+  description="This pages gives an introduction on who I am, what I do, and where I'm based."
   title="Home"
 >
   <div
@@ -17,7 +18,7 @@ import ContentH1 from "../components/content/H1.astro";
     {/* Identity x profile picture */}
     <Image
       alt="A young lad."
-      class="bg-current/10 rounded-lg outline outline-dashed hover:outline-solid outline-offset-4 size-40 hover:rotate-5 hover:scale-110 transition hover:-translate-y-2 duration-300"
+      class="bg-current/10 rounded-lg outline outline-current/30 hover:outline-current/70 outline-offset-4 size-40 hover:rotate-5 hover:scale-110 transition hover:-translate-y-2 duration-300"
       data-morph-cursor
       inferSize
       priority
@@ -26,7 +27,7 @@ import ContentH1 from "../components/content/H1.astro";
 
     <ContentH1>Hey, I'm Oyedeji.</ContentH1>
 
-    <ContentParagraph class="max-w-md font-serif text-2xl leading-relaxed">
+    <ContentParagraph class="max-w-md font-serif text-lg">
       And I'm a <ContentLink href="/projects"><em>developer</em></ContentLink> & <ContentLink
         href="/photos"><em>photographer</em></ContentLink
       > based in <em>Abuja, Nigeria.</em>

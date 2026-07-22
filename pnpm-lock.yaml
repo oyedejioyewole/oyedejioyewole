@@ -26,6 +26,9 @@ importers:
       '@fontsource/poppins':
         specifier: ^5.3.0
         version: 5.3.0
+      '@jdevalk/astro-seo-graph':
+        specifier: ^2.2.0
+        version: 2.2.0(astro@7.1.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)(@netlify/blobs@10.7.9(supports-color@10.2.2))(@types/node@26.1.1)(jiti@2.7.0)(rollup@4.62.0)(yaml@2.9.0))(typescript@5.9.3)
       '@netlify/blobs':
         specifier: ^10.7.9
         version: 10.7.9(supports-color@10.2.2)
@@ -1298,6 +1301,14 @@ packages:
   '@isaacs/fs-minipass@4.0.1':
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
+
+  '@jdevalk/astro-seo-graph@2.2.0':
+    resolution: {integrity: sha512-bnn4faHy7Ovf02gTsA2gTgra6fSsk/uT21p50qNj6gqfO5YslSs0p77KhjcLOVLjp7p3Hu7MAJAGYAVvKJaXBQ==}
+    peerDependencies:
+      astro: ^6.0.0 || ^7.0.0
+
+  '@jdevalk/seo-graph-core@0.7.0':
+    resolution: {integrity: sha512-eIksL6dGjnbYL0A5epklYvLYy5R4E31MlwSZtjKPWuGKJZmv2vbOaJsLbhN9GRwLyl6/H9rRSHqs/hONj1rp1w==}
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -5416,6 +5427,15 @@ packages:
     resolution: {integrity: sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA==}
     engines: {node: '>=11.0.0'}
 
+  schema-dts-lib@1.0.0:
+    resolution: {integrity: sha512-9MEO5vpQH9JdBioUupqluzxSYxPLjhmqRUudk15adUl/ypnRsM2/M1kN3AmVJQeG7nZqcL68H8JlGqQQT6vy9A==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      typescript: '>=4.9.5'
+
+  schema-dts@2.0.0:
+    resolution: {integrity: sha512-t7NoCy3Rn5GHGx6p7s1qIYK/AeIb8ZxJNR9WUNFkwMv2CiiGZBmqqYWc2FlZVm5ZbiHMY4OvBWhj7QtyrFO2Jw==}
+
   secure-json-parse@4.1.0:
     resolution: {integrity: sha512-l4KnYfEyqYJxDwlNVyRfO2E4NTHfMKAWdUuA8J0yve2Dz/E/PdBepY03RvyJpssIpRFwJoCD55wA+mEDs6ByWA==}
 
@@ -7394,6 +7414,21 @@ snapshots:
   '@isaacs/fs-minipass@4.0.1':
     dependencies:
       minipass: 7.1.3
+
+  '@jdevalk/astro-seo-graph@2.2.0(astro@7.1.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)(@netlify/blobs@10.7.9(supports-color@10.2.2))(@types/node@26.1.1)(jiti@2.7.0)(rollup@4.62.0)(yaml@2.9.0))(typescript@5.9.3)':
+    dependencies:
+      '@jdevalk/seo-graph-core': 0.7.0(typescript@5.9.3)
+      astro: 7.1.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)(@netlify/blobs@10.7.9(supports-color@10.2.2))(@types/node@26.1.1)(jiti@2.7.0)(rollup@4.62.0)(yaml@2.9.0)
+      schema-dts: 2.0.0(typescript@5.9.3)
+      zod: 4.4.3
+    transitivePeerDependencies:
+      - typescript
+
+  '@jdevalk/seo-graph-core@0.7.0(typescript@5.9.3)':
+    dependencies:
+      schema-dts: 2.0.0(typescript@5.9.3)
+    transitivePeerDependencies:
+      - typescript
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -12132,6 +12167,16 @@ snapshots:
       '@bruits/satteri-win32-x64-msvc': 0.9.5
 
   sax@1.6.0: {}
+
+  schema-dts-lib@1.0.0(typescript@5.9.3):
+    dependencies:
+      typescript: 5.9.3
+
+  schema-dts@2.0.0(typescript@5.9.3):
+    dependencies:
+      schema-dts-lib: 1.0.0(typescript@5.9.3)
+    transitivePeerDependencies:
+      - typescript
 
   secure-json-parse@4.1.0: {}
 

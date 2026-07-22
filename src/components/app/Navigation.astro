@@ -1,11 +1,11 @@
 ---
 import { buttonVariants } from "../../utils/variants";
 
-import HouseDuotone from "~icons/ph/house-duotone";
-import SlideshowDuotone from "~icons/ph/slideshow-duotone";
 import FolderOpenDuotone from "~icons/ph/folder-open-duotone";
+import HouseDuotone from "~icons/ph/house-duotone";
 import VerticalLineThin from "~icons/ph/line-vertical-thin";
 import List from "~icons/ph/list";
+import SlideshowDuotone from "~icons/ph/slideshow-duotone";
 import X from "~icons/ph/x";
 
 import UiBranding from "../ui/Branding.astro";
@@ -60,6 +60,7 @@ const navigationLinks = [
       <button
         class={buttonVariants({ class: "has-[svg]:flex", iconOnly: true })}
         data-navigation-toggle="close"
+        data-snap-cursor
         transition:persist
       >
         <X class="size-5" />
@@ -75,6 +76,7 @@ const navigationLinks = [
 
       <button
         class={buttonVariants({ iconOnly: true })}
+        data-snap-cursor
         data-navigation-toggle="open"
         transition:persist
       >
